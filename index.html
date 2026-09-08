@@ -38,7 +38,7 @@
             font-family: 'Segoe UI', 'PingFang SC', Roboto, system-ui, -apple-system, sans-serif;
             background: var(--gray-100);
             color: var(--gray-900);
-            padding: 24px 20px 60px;
+            padding: 16px 12px 40px;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -54,14 +54,14 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 28px;
-            padding-bottom: 16px;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
             border-bottom: 2px solid var(--gray-200);
         }
 
         .app-header h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             background: linear-gradient(135deg, var(--primary), #8b6cf7);
             -webkit-background-clip: text;
@@ -69,31 +69,31 @@
             background-clip: text;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
 
         .app-header h1 small {
             -webkit-text-fill-color: initial;
             color: var(--gray-700);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 400;
             background: var(--gray-200);
-            padding: 2px 14px;
+            padding: 2px 10px;
             border-radius: 20px;
         }
 
         .header-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .badge {
             display: inline-block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 20px;
             background: var(--gray-200);
             color: var(--gray-700);
@@ -121,8 +121,8 @@
             background: #fff;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 22px 26px 26px;
-            margin-bottom: 24px;
+            padding: 16px 18px 20px;
+            margin-bottom: 18px;
             transition: box-shadow var(--transition);
         }
         .card:hover {
@@ -130,12 +130,12 @@
         }
 
         .card-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: var(--gray-900);
             flex-wrap: wrap;
         }
@@ -144,21 +144,21 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: var(--primary);
             color: #fff;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             flex-shrink: 0;
         }
 
         .card-title .toggle-btn {
             margin-left: auto;
-            font-size: 13px;
-            padding: 2px 12px;
-            height: 28px;
+            font-size: 12px;
+            padding: 2px 10px;
+            height: 26px;
             background: var(--gray-200);
             border: none;
             border-radius: 6px;
@@ -176,21 +176,21 @@
         .form-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px 20px;
+            gap: 12px 16px;
             align-items: flex-end;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            flex: 1 1 150px;
-            min-width: 130px;
+            gap: 4px;
+            flex: 1 1 140px;
+            min-width: 110px;
             position: relative;
         }
 
         .form-group label {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             color: var(--gray-700);
             display: flex;
@@ -205,15 +205,16 @@
 
         .form-group select,
         .form-group input {
-            padding: 8px 12px;
+            padding: 6px 10px;
             border: 1.5px solid var(--gray-300);
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             background: #fff;
             transition: border-color var(--transition), box-shadow var(--transition);
             outline: none;
             width: 100%;
             color: var(--gray-900);
+            height: 36px;
         }
 
         .form-group select:focus,
@@ -239,7 +240,7 @@
             background: #fff;
             border: 1.5px solid var(--gray-300);
             border-radius: 8px;
-            max-height: 220px;
+            max-height: 200px;
             overflow-y: auto;
             z-index: 100;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -248,9 +249,9 @@
         }
 
         .suggestions-list .suggestion-item {
-            padding: 8px 14px;
+            padding: 6px 12px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--gray-900);
             transition: background 0.15s;
             display: flex;
@@ -263,20 +264,21 @@
         }
 
         .suggestions-list .suggestion-item .group-hint {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--gray-500);
             font-weight: 400;
             display: flex;
-            gap: 6px;
+            gap: 4px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .suggestions-list .suggestion-item .group-hint .tag {
             display: inline-block;
             background: var(--gray-200);
-            padding: 0 8px;
+            padding: 0 6px;
             border-radius: 10px;
-            font-size: 11px;
+            font-size: 10px;
             color: var(--gray-700);
         }
 
@@ -296,9 +298,9 @@
         }
 
         .suggestions-list .no-match {
-            padding: 12px 14px;
+            padding: 10px 12px;
             color: var(--gray-500);
-            font-size: 14px;
+            font-size: 13px;
             text-align: center;
         }
 
@@ -306,18 +308,18 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            padding: 8px 20px;
+            gap: 4px;
+            padding: 6px 16px;
             border: none;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: background var(--transition), transform 0.1s, opacity var(--transition);
             white-space: nowrap;
             background: var(--gray-200);
             color: var(--gray-700);
-            height: 40px;
+            height: 36px;
         }
 
         .btn:hover {
@@ -367,16 +369,16 @@
         }
 
         .btn-sm {
-            padding: 4px 12px;
-            font-size: 12px;
-            height: 30px;
+            padding: 3px 10px;
+            font-size: 11px;
+            height: 26px;
         }
 
         .btn-icon {
-            padding: 0 6px;
-            height: 24px;
-            min-width: 24px;
-            font-size: 12px;
+            padding: 0 4px;
+            height: 20px;
+            min-width: 20px;
+            font-size: 11px;
             background: transparent;
             border: none;
             border-radius: 4px;
@@ -397,18 +399,18 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 12px 24px;
+            gap: 8px 20px;
             background: var(--gray-100);
             border-radius: 8px;
-            padding: 12px 18px;
+            padding: 10px 14px;
             margin-top: 4px;
         }
 
         .data-status-bar .stat-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 14px;
+            gap: 4px;
+            font-size: 13px;
             color: var(--gray-700);
         }
 
@@ -420,12 +422,14 @@
         .table-wrap {
             overflow-x: auto;
             margin-top: 4px;
+            -webkit-overflow-scrolling: touch;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
+            font-size: 13px;
+            min-width: 600px;
         }
 
         thead {
@@ -435,18 +439,28 @@
 
         th {
             text-align: left;
-            padding: 10px 12px;
+            padding: 8px 10px;
             font-weight: 600;
             color: var(--gray-700);
             border-bottom: 2px solid var(--gray-200);
-            font-size: 13px;
+            font-size: 12px;
             white-space: nowrap;
+            min-width: 60px;
         }
 
+        th:nth-child(1) { min-width: 40px; }
+        th:nth-child(2) { min-width: 80px; }
+        th:nth-child(3) { min-width: 60px; }
+        th:nth-child(4) { min-width: 70px; }
+        th:nth-child(5) { min-width: 70px; }
+        th:nth-child(6) { min-width: 100px; }
+        th:nth-child(7) { min-width: 60px; }
+
         td {
-            padding: 10px 12px;
+            padding: 8px 10px;
             border-bottom: 1px solid var(--gray-200);
             vertical-align: middle;
+            white-space: nowrap;
         }
 
         tr:last-child td {
@@ -456,11 +470,11 @@
         .gender-tag {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             font-weight: 600;
-            padding: 2px 12px;
+            padding: 1px 10px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
         }
         .gender-tag.male {
             background: #d4e4ff;
@@ -473,13 +487,13 @@
 
         .medal-tag {
             display: inline-block;
-            padding: 2px 10px;
+            padding: 1px 8px;
             border-radius: 12px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             background: var(--gray-200);
             color: var(--gray-700);
-            margin: 1px 2px;
+            margin: 0 1px;
         }
         .medal-tag.body {
             background: #fff3d4;
@@ -497,16 +511,17 @@
 
         .nature-tag {
             display: inline-block;
-            padding: 2px 10px;
+            padding: 1px 8px;
             border-radius: 12px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             background: #e8e0ff;
             color: #6b4fa8;
+            white-space: nowrap;
         }
 
         .nature-tag .eff {
-            font-size: 10px;
+            font-size: 9px;
             opacity: 0.7;
             margin-left: 2px;
         }
@@ -519,28 +534,28 @@
 
         .empty-state {
             text-align: center;
-            padding: 32px 16px;
+            padding: 24px 16px;
             color: var(--gray-500);
-            font-size: 14px;
+            font-size: 13px;
         }
         .empty-state .icon {
-            font-size: 36px;
+            font-size: 30px;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         /* ===== 配对结果 ===== */
         .result-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 16px;
+            gap: 12px;
             margin-top: 8px;
         }
 
         .result-item {
             background: var(--gray-100);
             border-radius: var(--radius);
-            padding: 18px 20px;
+            padding: 14px 16px;
             border-left: 4px solid var(--primary);
             transition: background var(--transition), border-color var(--transition);
         }
@@ -562,23 +577,23 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 12px 20px;
+            gap: 8px 16px;
             font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 10px;
+            font-size: 14px;
+            margin-bottom: 8px;
         }
         .result-item .pair-header .vs {
             color: var(--gray-500);
             font-weight: 400;
-            font-size: 14px;
+            font-size: 13px;
         }
         .result-item .pair-header .stable-badge {
             display: inline-block;
             background: var(--stable-color);
             color: #fff;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 20px;
             letter-spacing: 0.5px;
         }
@@ -586,32 +601,32 @@
         .result-item .pair-detail {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px 30px;
-            font-size: 14px;
+            gap: 10px 24px;
+            font-size: 13px;
             color: var(--gray-700);
         }
         .result-item .pair-detail .label {
             color: var(--gray-500);
             font-weight: 500;
-            margin-right: 4px;
+            margin-right: 3px;
         }
 
         .result-item .inherit {
-            margin-top: 10px;
-            padding-top: 12px;
+            margin-top: 8px;
+            padding-top: 10px;
             border-top: 1px dashed var(--gray-300);
             display: flex;
             flex-wrap: wrap;
-            gap: 16px 30px;
-            font-size: 14px;
+            gap: 12px 24px;
+            font-size: 13px;
         }
         .result-item .inherit .inherit-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
         .result-item .inherit .inherit-item .icon {
-            font-size: 18px;
+            font-size: 16px;
         }
         .result-item .inherit .inherit-item .val {
             font-weight: 600;
@@ -625,14 +640,14 @@
         .result-item .common-groups {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 4px;
         }
         .result-item .common-groups .group-tag {
             background: var(--primary-light);
             color: var(--primary-dark);
-            padding: 2px 12px;
+            padding: 1px 10px;
             border-radius: 12px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
         }
 
@@ -640,30 +655,31 @@
         .filter-bar {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px 24px;
+            gap: 12px 20px;
             align-items: center;
-            padding: 12px 16px;
+            padding: 10px 14px;
             background: var(--gray-100);
             border-radius: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .filter-bar .filter-group {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            gap: 6px;
+            font-size: 13px;
             color: var(--gray-700);
         }
 
         .filter-bar .filter-group select,
         .filter-bar .filter-group input {
-            padding: 6px 10px;
+            padding: 4px 8px;
             border: 1.5px solid var(--gray-300);
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 13px;
             background: #fff;
             outline: none;
+            height: 32px;
         }
         .filter-bar .filter-group select:focus,
         .filter-bar .filter-group input:focus {
@@ -684,17 +700,18 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 12px 20px;
+            gap: 8px 14px;
             background: var(--gray-100);
             border-radius: 8px;
-            padding: 10px 18px;
-            margin-bottom: 16px;
+            padding: 8px 14px;
+            margin-bottom: 14px;
         }
 
         .account-bar .current-account {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--gray-700);
+            white-space: nowrap;
         }
 
         .account-bar .current-account span {
@@ -704,49 +721,52 @@
 
         .account-bar .account-input-group {
             display: flex;
-            gap: 8px;
-            flex: 1 1 260px;
+            gap: 6px;
+            flex: 1 1 200px;
+            min-width: 140px;
         }
 
         .account-bar .account-input-group input {
             flex: 1;
-            padding: 6px 12px;
+            padding: 4px 10px;
             border: 1.5px solid var(--gray-300);
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
             background: #fff;
+            height: 32px;
+            min-width: 60px;
         }
         .account-bar .account-input-group input:focus {
             border-color: var(--primary);
         }
 
         .account-bar .account-input-group .btn {
-            height: 36px;
-            padding: 0 16px;
-            font-size: 13px;
+            height: 32px;
+            padding: 0 12px;
+            font-size: 12px;
         }
 
         .account-bar .account-switch-group {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
             align-items: center;
+            flex: 1 1 auto;
         }
 
         .account-bar .account-switch-group .account-tag {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            padding: 4px 8px 4px 12px;
+            gap: 2px;
+            padding: 2px 6px 2px 10px;
             background: var(--gray-200);
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--gray-700);
             cursor: default;
             transition: background 0.2s, color 0.2s;
             border: 1.5px solid transparent;
-            position: relative;
         }
         .account-bar .account-switch-group .account-tag .tag-name {
             cursor: pointer;
@@ -762,14 +782,14 @@
         }
         .account-bar .account-switch-group .account-tag .tag-actions {
             display: flex;
-            gap: 2px;
-            margin-left: 4px;
+            gap: 1px;
+            margin-left: 2px;
         }
         .account-bar .account-switch-group .account-tag .tag-actions .btn-icon {
-            font-size: 11px;
-            padding: 0 3px;
-            height: 20px;
-            min-width: 20px;
+            font-size: 10px;
+            padding: 0 2px;
+            height: 18px;
+            min-width: 18px;
             color: var(--gray-500);
         }
         .account-bar .account-switch-group .account-tag .tag-actions .btn-icon:hover {
@@ -784,15 +804,15 @@
         /* ===== Toast ===== */
         .toast {
             position: fixed;
-            top: 24px;
-            right: 24px;
-            max-width: 380px;
+            top: 20px;
+            right: 20px;
+            max-width: 340px;
             background: var(--gray-900);
             color: #fff;
-            padding: 14px 22px;
+            padding: 12px 18px;
             border-radius: var(--radius);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-            font-size: 14px;
+            font-size: 13px;
             transform: translateX(120%);
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 999;
@@ -813,41 +833,42 @@
             color: #fff;
         }
 
+        /* ===== 响应式 ===== */
         @media (max-width: 700px) {
             .app-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
             .app-header h1 {
-                font-size: 22px;
+                font-size: 20px;
             }
             .card {
-                padding: 16px 18px 20px;
+                padding: 12px 14px 16px;
             }
             .form-row {
-                gap: 12px;
+                gap: 10px;
             }
             .form-group {
                 flex: 1 1 100%;
                 min-width: unset;
             }
-            .result-item .pair-header {
+            .form-group select,
+            .form-group input {
                 font-size: 14px;
+                height: 40px;
+            }
+            .result-item .pair-header {
+                font-size: 13px;
             }
             .result-item .pair-detail,
             .result-item .inherit {
                 flex-direction: column;
-                gap: 6px;
-            }
-            th,
-            td {
-                padding: 8px 6px;
-                font-size: 13px;
+                gap: 4px;
             }
             .data-status-bar {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 6px;
+                gap: 4px;
             }
             .filter-bar {
                 flex-direction: column;
@@ -859,36 +880,109 @@
             .card-title .toggle-btn {
                 margin-left: 0;
             }
+
+            /* 移动端账号栏优化 */
             .account-bar {
                 flex-direction: column;
                 align-items: stretch;
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            .account-bar .current-account {
+                font-size: 13px;
+                text-align: center;
             }
             .account-bar .account-input-group {
                 flex-wrap: wrap;
+                gap: 6px;
+            }
+            .account-bar .account-input-group input {
+                flex: 1 1 100%;
+                min-width: 80px;
+                height: 36px;
+                font-size: 14px;
+            }
+            .account-bar .account-input-group .btn {
+                flex: 0 0 auto;
+                height: 36px;
+                font-size: 13px;
+                padding: 0 16px;
             }
             .account-bar .account-switch-group {
-                justify-content: flex-start;
+                justify-content: center;
+                gap: 4px;
             }
             .account-bar .account-switch-group .account-tag {
-                padding: 4px 6px 4px 10px;
                 font-size: 12px;
+                padding: 2px 6px 2px 10px;
+            }
+
+            /* 表格移动端优化 */
+            .table-wrap {
+                margin: 0 -4px;
+                padding: 0 4px;
+            }
+            table {
+                font-size: 12px;
+                min-width: 520px;
+            }
+            th, td {
+                padding: 6px 8px;
+            }
+            th:nth-child(1) { min-width: 32px; }
+            th:nth-child(2) { min-width: 70px; }
+            th:nth-child(3) { min-width: 50px; }
+            th:nth-child(4) { min-width: 60px; }
+            th:nth-child(5) { min-width: 60px; }
+            th:nth-child(6) { min-width: 80px; }
+            th:nth-child(7) { min-width: 50px; }
+
+            .gender-tag {
+                font-size: 10px;
+                padding: 1px 8px;
+            }
+            .medal-tag {
+                font-size: 10px;
+                padding: 1px 6px;
+            }
+            .nature-tag {
+                font-size: 10px;
+                padding: 1px 6px;
+            }
+            .nature-tag .eff {
+                font-size: 8px;
             }
         }
 
         @media (max-width: 480px) {
             body {
-                padding: 12px 10px 40px;
+                padding: 10px 6px 30px;
             }
             .card {
-                padding: 12px 14px 16px;
+                padding: 10px 10px 14px;
             }
             .btn {
-                font-size: 13px;
-                padding: 6px 14px;
-                height: 36px;
+                font-size: 12px;
+                padding: 4px 12px;
+                height: 32px;
             }
             .app-header h1 {
-                font-size: 19px;
+                font-size: 18px;
+            }
+            .app-header h1 small {
+                font-size: 10px;
+            }
+            .account-bar .account-input-group .btn {
+                font-size: 12px;
+                padding: 0 12px;
+                height: 34px;
+            }
+            table {
+                font-size: 11px;
+                min-width: 440px;
+            }
+            th, td {
+                padding: 4px 6px;
             }
         }
 
@@ -904,7 +998,7 @@
         .flex-center {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .gap-8 {
             gap: 8px;
@@ -914,7 +1008,7 @@
         }
         .text-muted {
             color: var(--gray-500);
-            font-size: 13px;
+            font-size: 12px;
         }
         .text-center {
             text-align: center;
@@ -960,7 +1054,7 @@
                 <span class="stat-item">📋 精灵总数: <span class="num" id="totalPokemonCount">0</span></span>
                 <span class="stat-item">📁 蛋组种类: <span class="num" id="totalGroupCount">0</span></span>
                 <span class="stat-item">🚫 未发现组: <span class="num" id="undiscoveredCount">0</span></span>
-                <span class="stat-item" style="color:var(--gray-500);">✅ 数据已内置，无需上传</span>
+                <span class="stat-item" style="color:var(--gray-500);">✅ 数据已内置</span>
             </div>
         </section>
 
@@ -972,7 +1066,7 @@
             </div>
             <form id="addForm" autocomplete="off">
                 <div class="form-row">
-                    <div class="form-group" style="flex:2 1 220px;">
+                    <div class="form-group" style="flex:2 1 200px;">
                         <label>精灵名称 <span class="required">*</span></label>
                         <div class="autocomplete-wrapper">
                             <input type="text" id="pokemonNameInput" placeholder="输入名称关键字..." autocomplete="off">
@@ -1002,7 +1096,7 @@
                             <option value="粗嗓门">粗嗓门</option>
                         </select>
                     </div>
-                    <div class="form-group" style="flex:1.5 1 180px;">
+                    <div class="form-group" style="flex:1.5 1 160px;">
                         <label>性格 <span class="required">*</span></label>
                         <div class="autocomplete-wrapper">
                             <input type="text" id="natureInput" placeholder="输入性格名称..." autocomplete="off">
@@ -1014,10 +1108,10 @@
                     </div>
                 </div>
             </form>
-            <div style="margin-top:12px;font-size:13px;color:var(--gray-500);display:flex;flex-wrap:wrap;gap:6px 16px;">
-                <span>💡 精灵名称输入时自动匹配，显示蛋组信息</span>
-                <span>💡 性格输入时自动匹配，显示增减益</span>
-                <span>⚠️ 仅当名称、性别、奖牌、性格全部相同时才禁止重复添加</span>
+            <div style="margin-top:10px;font-size:12px;color:var(--gray-500);display:flex;flex-wrap:wrap;gap:4px 12px;">
+                <span>💡 名称输入自动匹配，显示蛋组</span>
+                <span>💡 性格输入自动匹配，显示增减益</span>
+                <span>⚠️ 五项全同才禁止重复</span>
             </div>
         </section>
 
@@ -1058,7 +1152,7 @@
                 <span class="step">3</span> 稳定遗传分析
                 <span class="badge" id="resultBadge">待分析</span>
             </div>
-            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
                 <button class="btn btn-success" id="analyzeBtn">🔍 分析配对</button>
                 <button class="btn btn-outline" id="clearResultBtn">清除结果</button>
             </div>
@@ -1074,9 +1168,9 @@
                 </div>
                 <div class="filter-group" style="flex:1;">
                     <label for="searchName">搜索精灵：</label>
-                    <input type="text" id="searchName" placeholder="输入名称过滤..." style="flex:1;min-width:100px;">
+                    <input type="text" id="searchName" placeholder="输入名称过滤..." style="flex:1;min-width:80px;">
                 </div>
-                <span style="font-size:13px;color:var(--gray-500);">⭐ 稳定遗传组合优先展示</span>
+                <span style="font-size:12px;color:var(--gray-500);">⭐ 稳定遗传优先展示</span>
             </div>
 
             <div id="resultContainer">
@@ -1094,7 +1188,7 @@
 
     <script>
         // ================================================================
-        //  内置蛋组数据（来自 EggGroup.json）
+        //  内置蛋组数据（来自 EggGroup.json — 完整替换）
         // ================================================================
         const EMBEDDED_DATA = [
     [
@@ -1330,22 +1424,7 @@
         "软体组"
     ],
     [
-        "化蝶（平常的样子）",
-        "昆虫组",
-        "软体组"
-    ],
-    [
-        "化蝶（幽冥眼的样子）",
-        "昆虫组",
-        "软体组"
-    ],
-    [
-        "化蝶（喵喵的样子）",
-        "昆虫组",
-        "软体组"
-    ],
-    [
-        "化蝶（奇丽花的样子）",
+        "化蝶",
         "昆虫组",
         "软体组"
     ],
@@ -3654,7 +3733,6 @@
                 } catch (_) {
                     accountList = ['default'];
                 }
-                // 确保 default 存在
                 if (!accountList.includes('default')) {
                     accountList.unshift('default');
                 }
@@ -3701,20 +3779,17 @@
 
             function switchAccount(accountName) {
                 if (accountName === currentAccount) return;
-                // 保存当前账号数据
                 const currentData = {
                     pokemons: userPokemons,
                     idCounter: idCounter
                 };
                 saveAccountData(currentAccount, currentData);
 
-                // 加载新账号数据
                 const newData = loadAccountData(accountName);
                 userPokemons = newData.pokemons || [];
                 idCounter = newData.idCounter || 0;
                 currentAccount = accountName;
 
-                // 更新UI
                 currentAccountName.textContent = accountName;
                 renderPokemonList();
                 updateResultBadge();
@@ -3734,7 +3809,6 @@
                     toastMessage('账号名称不能超过20个字符', 'warning');
                     return;
                 }
-                // 如果账号已存在，直接切换
                 if (accountList.includes(accountName)) {
                     if (accountName !== currentAccount) {
                         switchAccount(accountName);
@@ -3743,12 +3817,9 @@
                     }
                     return;
                 }
-                // 新账号
                 accountList.push(accountName);
                 saveAccountList();
-                // 创建空数据
                 saveAccountData(accountName, { pokemons: [], idCounter: 0 });
-                // 切换到新账号
                 switchAccount(accountName);
                 renderAccountTags();
                 toastMessage(`已创建并切换到账号：${accountName}`, 'success');
@@ -3773,19 +3844,14 @@
                     toastMessage(`账号 "${newName}" 已存在`, 'warning');
                     return false;
                 }
-                // 重命名存储数据
                 const data = loadAccountData(oldName);
-                // 删除旧数据
                 deleteAccountData(oldName);
-                // 保存新数据
                 saveAccountData(newName, data);
-                // 更新账号列表
                 const idx = accountList.indexOf(oldName);
                 if (idx !== -1) {
                     accountList[idx] = newName;
                     saveAccountList();
                 }
-                // 如果当前账号是旧名称，更新当前账号
                 if (currentAccount === oldName) {
                     currentAccount = newName;
                     currentAccountName.textContent = newName;
@@ -3806,13 +3872,11 @@
                     return;
                 }
                 if (!confirm(`确定要删除账号 "${accountName}" 及其所有精灵数据吗？`)) return;
-                // 从列表中移除
                 const idx = accountList.indexOf(accountName);
                 if (idx !== -1) {
                     accountList.splice(idx, 1);
                     saveAccountList();
                 }
-                // 删除存储数据
                 deleteAccountData(accountName);
                 renderAccountTags();
                 toastMessage(`已删除账号 "${accountName}"`, 'success');
@@ -3838,7 +3902,6 @@
                     const actions = document.createElement('span');
                     actions.className = 'tag-actions';
 
-                    // 编辑按钮（仅非default账号可编辑）
                     if (acc !== 'default') {
                         const editBtn = document.createElement('button');
                         editBtn.className = 'btn-icon';
@@ -3872,7 +3935,7 @@
                 }
             }
 
-            // -------- 数据初始化：合并同名精灵蛋组 --------
+            // -------- 数据初始化 --------
             function initEggData() {
                 const map = new Map();
                 for (const item of EMBEDDED_DATA) {
@@ -3895,18 +3958,15 @@
                 return eggData;
             }
 
-            // -------- 获取精灵蛋组 --------
             function getPokemonGroups(name) {
                 const found = eggData.find(d => d.name === name);
                 return found ? found.groups : [];
             }
 
-            // -------- 获取性格信息 --------
             function getNatureInfo(name) {
                 return NATURE_MAP[name] || null;
             }
 
-            // -------- 统计信息 --------
             function updateStats() {
                 totalPokemonCount.textContent = eggData.length;
                 const allGroups = new Set();
@@ -3921,7 +3981,6 @@
                 undiscoveredCount.textContent = undiscovered;
             }
 
-            // -------- 加载当前账号数据 --------
             function loadCurrentAccount() {
                 let lastAccount = localStorage.getItem('eggGeneticsLastAccount');
                 if (lastAccount && accountList.includes(lastAccount)) {
@@ -3939,7 +3998,6 @@
                 clearResults();
             }
 
-            // -------- 保存当前账号数据 --------
             function saveCurrentAccountData() {
                 const data = {
                     pokemons: userPokemons,
@@ -3949,7 +4007,6 @@
                 localStorage.setItem('eggGeneticsLastAccount', currentAccount);
             }
 
-            // -------- 折叠切换 --------
             function toggleList() {
                 listCollapsed = !listCollapsed;
                 if (listCollapsed) {
@@ -4220,7 +4277,6 @@
                 });
             }
 
-            // -------- 删除精灵 --------
             function deletePokemon(id) {
                 userPokemons = userPokemons.filter(p => p.id !== id);
                 saveCurrentAccountData();
@@ -4230,7 +4286,6 @@
                 toastMessage('已删除该精灵', 'success');
             }
 
-            // -------- 清空所有精灵（当前账号） --------
             function clearAllPokemons() {
                 if (userPokemons.length === 0) {
                     toastMessage('没有精灵需要清除', 'warning');
@@ -4246,7 +4301,6 @@
                 toastMessage(`已清空账号 ${currentAccount} 的所有精灵`, 'success');
             }
 
-            // -------- 清空结果 --------
             function clearResults() {
                 currentPairs = [];
                 resultGrid.style.display = 'none';
@@ -4256,7 +4310,6 @@
                 filterBar.style.display = 'none';
             }
 
-            // -------- 更新结果徽章 --------
             function updateResultBadge() {
                 if (userPokemons.length === 0) {
                     resultBadge.textContent = '无精灵';
@@ -4310,7 +4363,6 @@
                             inheritVoice = male.voiceMedal;
                         }
 
-                        // 只保留至少有一个奖牌相同的配对
                         if (inheritBody === null && inheritVoice === null) continue;
 
                         let inheritNature = null;
@@ -4335,7 +4387,7 @@
             }
 
             // ============================================================
-            //  渲染配对结果（支持筛选和排序）
+            //  渲染配对结果
             // ============================================================
             function renderResults(pairs) {
                 if (pairs.length === 0) {
@@ -4349,7 +4401,6 @@
                     return;
                 }
 
-                // 按稳定遗传优先排序（stable在前）
                 const sorted = [...pairs].sort((a, b) => (b.isStable ? 1 : 0) - (a.isStable ? 1 : 0));
 
                 resultBadge.textContent = `${pairs.length} 个配对${pairs.some(p => p.isStable) ? ' ⭐ 含稳定遗传' : ''}`;
@@ -4359,7 +4410,6 @@
                 resultGrid.innerHTML = '';
                 filterBar.style.display = 'flex';
 
-                // 应用筛选
                 const type = filterType.value;
                 const search = searchName.value.trim().toLowerCase();
                 let filtered = sorted;
@@ -4419,7 +4469,7 @@
                                     <span class="vs">×</span>
                                     <span>${female.name} <span class="gender-tag female">♀ 母</span></span>
                                     ${stableBadge}
-                                    <span style="font-weight:400;font-size:13px;color:var(--gray-500);">
+                                    <span style="font-weight:400;font-size:12px;color:var(--gray-500);">
                                         共同蛋组: <span class="common-groups">${groupsHtml}</span>
                                     </span>
                                 </div>
@@ -4455,7 +4505,7 @@
             }
 
             // ============================================================
-            //  执行分析并应用筛选
+            //  执行分析
             // ============================================================
             function performAnalysis() {
                 if (userPokemons.length === 0) {
@@ -4483,7 +4533,7 @@
             }
 
             // ============================================================
-            //  添加精灵（性格必填）
+            //  添加精灵
             // ============================================================
             function addPokemon(e) {
                 e.preventDefault();
@@ -4569,7 +4619,6 @@
                 loadAccountList();
                 loadCurrentAccount();
 
-                // 折叠按钮事件
                 toggleListBtn.addEventListener('click', toggleList);
 
                 addForm.addEventListener('submit', addPokemon);
@@ -4589,7 +4638,6 @@
                     if (currentPairs.length > 0) renderResults(currentPairs);
                 });
 
-                // 账号管理
                 addAccountBtn.addEventListener('click', function() {
                     const name = newAccountInput.value.trim();
                     addOrSwitchAccount(name);
