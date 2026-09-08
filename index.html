@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧬 精灵蛋组遗传 · 内置数据</title>
+    <style>
+        /* ==================== CSS ==================== */
+        :root {
+            --primary: #5b7cfa;
+            --primary-dark: #4a67d6;
+            --primary-light: #e8edff;
+            --success: #34c759;
+            --danger: #ff3b30;
+            --warning: #ff9500;
+            --gray-100: #f7f8fc;
+            --gray-200: #e9ecf2;
+            --gray-300: #d1d6e0;
+            --gray-500: #8e96a8;
+            --gray-700: #4a5166;
+            --gray-900: #1a1f2e;
+            --radius: 12px;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --transition: 0.25s ease;
+            --male-color: #4a90d9;
+            --female-color: #e8688a;
+            --stable-color: #2ecc71;
+            --stable-bg: #eafaf1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, system-ui, -apple-system, sans-serif;
+            background: var(--gray-100);
+            color: var(--gray-900);
+            padding: 24px 20px 60px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .app-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), #8b6cf7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .app-header h1 small {
+            -webkit-text-fill-color: initial;
+            color: var(--gray-700);
+            font-size: 14px;
+            font-weight: 400;
+            background: var(--gray-200);
+            padding: 2px 14px;
+            border-radius: 20px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 14px;
+            border-radius: 20px;
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .badge.success {
+            background: #d4f5d9;
+            color: #1a7a2e;
+        }
+        .badge.warning {
+            background: #fff3d4;
+            color: #b36b00;
+        }
+        .badge.info {
+            background: #d4edff;
+            color: #0066b3;
+        }
+        .badge.stable {
+            background: var(--stable-bg);
+            color: #1a7a2e;
+            border: 1px solid var(--stable-color);
+        }
+
+        .card {
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 22px 26px 26px;
+            margin-bottom: 24px;
+            transition: box-shadow var(--transition);
+        }
+        .card:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray-900);
+            flex-wrap: wrap;
+        }
+
+        .card-title .step {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .card-title .toggle-btn {
+            margin-left: auto;
+            font-size: 13px;
+            padding: 2px 12px;
+            height: 28px;
+            background: var(--gray-200);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .card-title .toggle-btn:hover {
+            background: var(--gray-300);
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 20px;
+            align-items: flex-end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1 1 150px;
+            min-width: 130px;
+            position: relative;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .form-group label .required {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .form-group select,
+        .form-group input {
+            padding: 8px 12px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+            transition: border-color var(--transition), box-shadow var(--transition);
+            outline: none;
+            width: 100%;
+            color: var(--gray-900);
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(91, 124, 250, 0.15);
+        }
+
+        .autocomplete-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .autocomplete-wrapper input {
+            width: 100%;
+        }
+
+        .suggestions-list {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1.5px solid var(--gray-300);
+            border-radius: 8px;
+            max-height: 220px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            display: none;
+            padding: 4px 0;
+        }
+
+        .suggestions-list .suggestion-item {
+            padding: 8px 14px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--gray-900);
+            transition: background 0.15s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .suggestions-list .suggestion-item:hover {
+            background: var(--primary-light);
+        }
+
+        .suggestions-list .suggestion-item .group-hint {
+            font-size: 12px;
+            color: var(--gray-500);
+            font-weight: 400;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .suggestions-list .suggestion-item .group-hint .tag {
+            display: inline-block;
+            background: var(--gray-200);
+            padding: 0 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            color: var(--gray-700);
+        }
+
+        .suggestions-list .suggestion-item .group-hint .tag.undiscovered {
+            background: #ffe4e4;
+            color: #c0392b;
+        }
+
+        .suggestions-list .suggestion-item .group-hint .plus {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .suggestions-list .suggestion-item .group-hint .minus {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .suggestions-list .no-match {
+            padding: 12px 14px;
+            color: var(--gray-500);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition), transform 0.1s, opacity var(--transition);
+            white-space: nowrap;
+            background: var(--gray-200);
+            color: var(--gray-700);
+            height: 40px;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+        .btn:active {
+            transform: scale(0.97);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: #fff;
+        }
+        .btn-success:hover {
+            background: #2db84e;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: #fff;
+        }
+        .btn-danger:hover {
+            background: #e0352b;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--gray-300);
+            color: var(--gray-700);
+        }
+        .btn-outline:hover {
+            background: var(--gray-100);
+            border-color: var(--gray-500);
+        }
+
+        .btn-sm {
+            padding: 4px 12px;
+            font-size: 12px;
+            height: 30px;
+        }
+
+        .data-status-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 24px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 12px 18px;
+            margin-top: 4px;
+        }
+
+        .data-status-bar .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: var(--gray-700);
+        }
+
+        .data-status-bar .stat-item .num {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin-top: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: var(--gray-100);
+            border-radius: 8px;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 12px;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 2px solid var(--gray-200);
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .gender-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .gender-tag.male {
+            background: #d4e4ff;
+            color: var(--male-color);
+        }
+        .gender-tag.female {
+            background: #ffe4ec;
+            color: var(--female-color);
+        }
+
+        .medal-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            background: var(--gray-200);
+            color: var(--gray-700);
+            margin: 1px 2px;
+        }
+        .medal-tag.body {
+            background: #fff3d4;
+            color: #b36b00;
+        }
+        .medal-tag.voice {
+            background: #d4edff;
+            color: #0066b3;
+        }
+        .medal-tag.none {
+            background: var(--gray-100);
+            color: var(--gray-500);
+            font-weight: 400;
+        }
+
+        .nature-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            background: #e8e0ff;
+            color: #6b4fa8;
+        }
+
+        .nature-tag .eff {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-left: 2px;
+        }
+        .nature-tag .eff.plus {
+            color: var(--success);
+        }
+        .nature-tag .eff.minus {
+            color: var(--danger);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 32px 16px;
+            color: var(--gray-500);
+            font-size: 14px;
+        }
+        .empty-state .icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* ===== 配对结果 ===== */
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .result-item {
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            border-left: 4px solid var(--primary);
+            transition: background var(--transition), border-color var(--transition);
+        }
+        .result-item:hover {
+            background: #f0f3ff;
+        }
+
+        .result-item.stable-pair {
+            border-left: 6px solid var(--stable-color);
+            background: var(--stable-bg);
+            box-shadow: 0 2px 12px rgba(46, 204, 113, 0.15);
+            order: -1;
+        }
+        .result-item.stable-pair:hover {
+            background: #d5f5e3;
+        }
+
+        .result-item .pair-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 20px;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .result-item .pair-header .vs {
+            color: var(--gray-500);
+            font-weight: 400;
+            font-size: 14px;
+        }
+        .result-item .pair-header .stable-badge {
+            display: inline-block;
+            background: var(--stable-color);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .result-item .pair-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 30px;
+            font-size: 14px;
+            color: var(--gray-700);
+        }
+        .result-item .pair-detail .label {
+            color: var(--gray-500);
+            font-weight: 500;
+            margin-right: 4px;
+        }
+
+        .result-item .inherit {
+            margin-top: 10px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--gray-300);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 30px;
+            font-size: 14px;
+        }
+        .result-item .inherit .inherit-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .result-item .inherit .inherit-item .icon {
+            font-size: 18px;
+        }
+        .result-item .inherit .inherit-item .val {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        .result-item .inherit .inherit-item .val.none {
+            color: var(--gray-500);
+            font-weight: 400;
+        }
+
+        .result-item .common-groups {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .result-item .common-groups .group-tag {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* ===== 筛选器 ===== */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .filter-bar .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--gray-700);
+        }
+
+        .filter-bar .filter-group select,
+        .filter-bar .filter-group input {
+            padding: 6px 10px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+            outline: none;
+        }
+        .filter-bar .filter-group select:focus,
+        .filter-bar .filter-group input:focus {
+            border-color: var(--primary);
+        }
+
+        /* ===== 折叠控制 ===== */
+        .list-collapsible {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .list-collapsible.collapsed {
+            display: none;
+        }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            max-width: 380px;
+            background: var(--gray-900);
+            color: #fff;
+            padding: 14px 22px;
+            border-radius: var(--radius);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            font-size: 14px;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 999;
+        }
+        .toast.show {
+            transform: translateX(0);
+        }
+        .toast.success {
+            background: var(--success);
+            color: #fff;
+        }
+        .toast.error {
+            background: var(--danger);
+            color: #fff;
+        }
+        .toast.warning {
+            background: var(--warning);
+            color: #fff;
+        }
+
+        @media (max-width: 700px) {
+            .app-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .app-header h1 {
+                font-size: 22px;
+            }
+            .card {
+                padding: 16px 18px 20px;
+            }
+            .form-row {
+                gap: 12px;
+            }
+            .form-group {
+                flex: 1 1 100%;
+                min-width: unset;
+            }
+            .result-item .pair-header {
+                font-size: 14px;
+            }
+            .result-item .pair-detail,
+            .result-item .inherit {
+                flex-direction: column;
+                gap: 6px;
+            }
+            th,
+            td {
+                padding: 8px 6px;
+                font-size: 13px;
+            }
+            .data-status-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-bar .filter-group {
+                flex-wrap: wrap;
+            }
+            .card-title .toggle-btn {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px 10px 40px;
+            }
+            .card {
+                padding: 12px 14px 16px;
+            }
+            .btn {
+                font-size: 13px;
+                padding: 6px 14px;
+                height: 36px;
+            }
+            .app-header h1 {
+                font-size: 19px;
+            }
+        }
+
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mt-16 {
+            margin-top: 16px;
+        }
+        .flex {
+            display: flex;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .gap-12 {
+            gap: 12px;
+        }
+        .text-muted {
+            color: var(--gray-500);
+            font-size: 13px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .w-full {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app" id="app">
+        <!-- ===== 头部 ===== -->
+        <header class="app-header">
+            <h1>
+                🧬 精灵蛋组遗传
+                <small>内置数据 · 奖牌相同配对</small>
+            </h1>
+            <div class="header-actions">
+                <span class="badge success" id="dataStatus">📂 数据已加载</span>
+                <button class="btn btn-outline btn-sm" id="clearAllBtn" title="清除所有已输入的精灵">🗑️ 清空精灵</button>
+            </div>
+        </header>
+
+        <!-- ===== 数据状态 ===== -->
+        <section class="card" id="statusCard">
+            <div class="card-title">
+                <span class="step">📊</span> 蛋组数据概览
+            </div>
+            <div class="data-status-bar" id="dataStatusBar">
+                <span class="stat-item">📋 精灵总数: <span class="num" id="totalPokemonCount">0</span></span>
+                <span class="stat-item">📁 蛋组种类: <span class="num" id="totalGroupCount">0</span></span>
+                <span class="stat-item">🚫 未发现组: <span class="num" id="undiscoveredCount">0</span></span>
+                <span class="stat-item" style="color:var(--gray-500);">✅ 数据已内置，无需上传</span>
+            </div>
+        </section>
+
+        <!-- ===== 添加精灵 ===== -->
+        <section class="card" id="addCard">
+            <div class="card-title">
+                <span class="step">1</span> 添加已有精灵
+                <span class="badge info" id="inputHint">输入名称自动匹配</span>
+            </div>
+            <form id="addForm" autocomplete="off">
+                <div class="form-row">
+                    <div class="form-group" style="flex:2 1 220px;">
+                        <label>精灵名称 <span class="required">*</span></label>
+                        <div class="autocomplete-wrapper">
+                            <input type="text" id="pokemonNameInput" placeholder="输入名称关键字..." autocomplete="off">
+                            <div class="suggestions-list" id="pokemonSuggestionsList"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>性别 <span class="required">*</span></label>
+                        <select id="genderSelect">
+                            <option value="公">♂ 公</option>
+                            <option value="母">♀ 母</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>体型奖牌</label>
+                        <select id="bodyMedalSelect">
+                            <option value="无">无</option>
+                            <option value="小不点">小不点</option>
+                            <option value="大块头">大块头</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>声音奖牌</label>
+                        <select id="voiceMedalSelect">
+                            <option value="无">无</option>
+                            <option value="婉转声">婉转声</option>
+                            <option value="粗嗓门">粗嗓门</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:1.5 1 180px;">
+                        <label>性格 <span class="required">*</span></label>
+                        <div class="autocomplete-wrapper">
+                            <input type="text" id="natureInput" placeholder="输入性格名称..." autocomplete="off">
+                            <div class="suggestions-list" id="natureSuggestionsList"></div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="flex:0 0 auto; min-width:unset;">
+                        <button type="submit" class="btn btn-primary" id="addBtn">➕ 添加</button>
+                    </div>
+                </div>
+            </form>
+            <div style="margin-top:12px;font-size:13px;color:var(--gray-500);display:flex;flex-wrap:wrap;gap:6px 16px;">
+                <span>💡 精灵名称输入时自动匹配，显示蛋组信息</span>
+                <span>💡 性格输入时自动匹配，显示增减益</span>
+                <span>⚠️ 仅当名称、性别、奖牌、性格全部相同时才禁止重复添加</span>
+            </div>
+        </section>
+
+        <!-- ===== 已输入精灵列表 ===== -->
+        <section class="card" id="listCard">
+            <div class="card-title">
+                <span class="step">2</span> 已输入的精灵
+                <span class="badge" id="listCount">0 只</span>
+                <button class="toggle-btn" id="toggleListBtn" title="折叠/展开列表">▼ 折叠</button>
+            </div>
+            <div class="list-collapsible" id="listCollapsible">
+                <div class="table-wrap" id="pokemonListWrap">
+                    <div class="empty-state" id="emptyList">
+                        <span class="icon">🐣</span>
+                        还没有添加任何精灵，请在上方添加。
+                    </div>
+                    <table id="pokemonTable" style="display:none;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>名称</th>
+                                <th>性别</th>
+                                <th>体型奖牌</th>
+                                <th>声音奖牌</th>
+                                <th>性格</th>
+                                <th style="text-align:center;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pokemonTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 配对分析 ===== -->
+        <section class="card" id="resultCard">
+            <div class="card-title">
+                <span class="step">3</span> 稳定遗传分析
+                <span class="badge" id="resultBadge">待分析</span>
+            </div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
+                <button class="btn btn-success" id="analyzeBtn">🔍 分析配对</button>
+                <button class="btn btn-outline" id="clearResultBtn">清除结果</button>
+            </div>
+
+            <!-- 筛选器 -->
+            <div class="filter-bar" id="filterBar" style="display:none;">
+                <div class="filter-group">
+                    <label for="filterType">显示：</label>
+                    <select id="filterType">
+                        <option value="all">全部（奖牌相同）</option>
+                        <option value="stable">稳定遗传（性格一致）</option>
+                    </select>
+                </div>
+                <div class="filter-group" style="flex:1;">
+                    <label for="searchName">搜索精灵：</label>
+                    <input type="text" id="searchName" placeholder="输入名称过滤..." style="flex:1;min-width:100px;">
+                </div>
+                <span style="font-size:13px;color:var(--gray-500);">⭐ 稳定遗传组合优先展示</span>
+            </div>
+
+            <div id="resultContainer">
+                <div class="empty-state" id="emptyResult">
+                    <span class="icon">🔬</span>
+                    点击「分析配对」查看奖牌相同的可遗传组合。
+                </div>
+                <div class="result-grid" id="resultGrid" style="display:none;"></div>
+            </div>
+        </section>
+
+        <!-- ===== Toast ===== -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script>
+        // ================================================================
+        //  内置蛋组数据（来自 EggGroup.json）
+        // ================================================================
+        const EMBEDDED_DATA = [
+            ["迪莫", "未发现"],
+            ["喵喵", "动物组", "拟人组"],
+            ["喵呜", "动物组", "拟人组"],
+            ["魔力猫", "动物组", "拟人组"],
+            ["火花", "魔力组", "巨灵组"],
+            ["焰火", "魔力组", "巨灵组"],
+            ["火神", "魔力组", "巨灵组"],
+            ["水蓝蓝", "魔力组"],
+            ["波波拉", "魔力组"],
+            ["水灵", "魔力组"],
+            ["鸭吉吉", "天空组"],
+            ["板板壳", "两栖组"],
+            ["咔咔壳", "两栖组"],
+            ["水泡壳", "两栖组"],
+            ["锥尾羊", "动物组"],
+            ["铃兰羊", "动物组"],
+            ["花影羚羊", "动物组"],
+            ["雪绒鸟", "天空组"],
+            ["冬羽雀", "天空组"],
+            ["岚鸟", "天空组"],
+            ["小灵菇", "植物组", "魔力组"],
+            ["幻灵菇", "植物组", "魔力组"],
+            ["幻影灵菇", "植物组", "魔力组"],
+            ["石肤蜥", "两栖组", "大地组"],
+            ["石刺蜥", "两栖组", "大地组"],
+            ["石冠王蜥", "两栖组", "大地组"],
+            ["布是石", "大地组", "巨灵组"],
+            ["布是岩", "大地组", "巨灵组"],
+            ["布克棱岩", "大地组", "巨灵组"],
+            ["恶魔叮", "妖精组"],
+            ["叮叮恶魔", "妖精组"],
+            ["毛毛", "昆虫组", "软体组"],
+            ["爬爬", "昆虫组", "软体组"],
+            ["化蝶", "昆虫组", "软体组"],
+            ["幽影树", "植物组", "妖精组"],
+            ["小鼠獭", "动物组", "两栖组"],
+            ["燕尾獭", "动物组", "两栖组"],
+            ["卷胡巨獭", "动物组", "两栖组"],
+            ["矿晶虫", "软体组", "大地组"],
+            ["晶石蜗", "软体组", "大地组"],
+            ["奇丽草", "植物组"],
+            ["奇丽叶", "植物组"],
+            ["奇丽花", "植物组"],
+            ["丢丢", "两栖组"],
+            ["卡卡虫", "两栖组"],
+            ["卡瓦重", "两栖组"],
+            ["护主犬", "动物组"],
+            ["音速犬", "动物组"],
+            ["绿耳松鼠", "动物组"],
+            ["抱枕松鼠", "动物组"],
+            ["蹦床松鼠", "动物组"],
+            ["嘟嘟煲", "妖精组", "大地组"],
+            ["嘟嘟锅", "妖精组", "大地组"],
+            ["小灵面", "魔力组"],
+            ["暗影灵面", "魔力组"],
+            ["幽冥眼", "魔力组"],
+            ["梦游", "魔力组", "妖精组"],
+            ["梦游", "妖精组", "魔力组"],
+            ["梦悠悠", "魔力组", "妖精组"],
+            ["梦悠悠", "妖精组", "魔力组"],
+            ["兽花蕾", "植物组"],
+            ["伏地兽", "动物组"],
+            ["贪食鼹", "动物组"],
+            ["巨噬针鼹", "动物组"],
+            ["蹦蹦种子", "植物组"],
+            ["蹦蹦草", "植物组"],
+            ["蹦蹦花", "植物组"],
+            ["电咩咩", "动物组"],
+            ["粉咩咩", "动物组"],
+            ["电球咩咩", "动物组"],
+            ["蒲公英", "植物组", "天空组"],
+            ["蒲公英娃娃", "植物组", "天空组"],
+            ["伊贝儿", "植物组", "软体组"],
+            ["伊贝粉粉", "植物组", "软体组"],
+            ["白发懒人", "拟人组", "巨灵组"],
+            ["动力猿", "拟人组", "巨灵组"],
+            ["瞌睡王", "拟人组", "巨灵组"],
+            ["海盔虫", "海洋组", "巨灵组"],
+            ["刺盔虫", "海洋组", "巨灵组"],
+            ["千棘盔", "海洋组", "巨灵组"],
+            ["菊花梨", "植物组"],
+            ["小星光", "动物组"],
+            ["星光狮", "动物组"],
+            ["一窝蜂", "昆虫组", "天空组"],
+            ["黄蜂后", "昆虫组", "天空组"],
+            ["花魁蜂后", "昆虫组", "天空组"],
+            ["小夜", "拟人组", "妖精组"],
+            ["紫夜", "拟人组", "妖精组"],
+            ["朔夜伊芙", "拟人组", "妖精组"],
+            ["乖乖鹄", "天空组", "两栖组"],
+            ["蓝珠天鹅", "天空组", "两栖组"],
+            ["翠顶夫人", "天空组", "两栖组"],
+            ["黑羽夫人", "天空组", "两栖组"],
+            ["锤头鹳", "天空组", "两栖组"],
+            ["绿草精灵", "妖精组", "拟人组"],
+            ["魔草巫灵", "妖精组", "拟人组"],
+            ["记忆石", "大地组"],
+            ["咔咔羽毛", "天空组"],
+            ["咔咔雀", "天空组"],
+            ["咔咔鸟", "天空组"],
+            ["小草虫", "昆虫组", "拟人组"],
+            ["草衣虫", "昆虫组", "拟人组"],
+            ["花衣蝶", "昆虫组", "拟人组"],
+            ["绿翼鸟", "天空组", "妖精组"],
+            ["魔翼鸟", "天空组", "妖精组"],
+            ["魔眷鸟", "天空组", "妖精组"],
+            ["阿米亚特", "大地组", "巨灵组"],
+            ["阿米樱", "大地组", "巨灵组"],
+            ["罗隐", "大地组", "巨灵组"],
+            ["风铃鲨", "海洋组", "天空组"],
+            ["蓝蝶鲨", "海洋组", "天空组"],
+            ["彩蝶鲨", "海洋组", "天空组"],
+            ["石石", "大地组", "魔力组"],
+            ["巨灵石", "大地组", "魔力组"],
+            ["仪使者", "妖精组", "大地组"],
+            ["仪式之星", "妖精组", "大地组"],
+            ["仪式巨像", "妖精组", "大地组"],
+            ["小独角兽", "动物组", "巨灵组"],
+            ["白金独角兽", "动物组", "巨灵组"],
+            ["旋叶虫", "昆虫组", "植物组"],
+            ["蓬叶虫", "昆虫组", "植物组"],
+            ["风滚暮虫", "昆虫组", "植物组"],
+            ["小黑猫", "动物组", "妖精组"],
+            ["黑猫巫师", "动物组", "妖精组"],
+            ["忽幽狸", "动物组", "拟人组"],
+            ["影狸", "动物组", "拟人组"],
+            ["多多", "拟人组"],
+            ["多啦多", "拟人组"],
+            ["古啦多", "拟人组"],
+            ["哭哭菇", "植物组"],
+            ["怖须菇", "植物组"],
+            ["怖哭菇", "植物组"],
+            ["恶魔狼", "动物组"],
+            ["小电企鹅", "天空组"],
+            ["电企鹅", "天空组"],
+            ["雪豆丁", "拟人组", "巨灵组"],
+            ["雪蛮人", "拟人组", "巨灵组"],
+            ["雪巨人", "拟人组", "巨灵组"],
+            ["呼呼猪", "动物组"],
+            ["獠牙猪", "动物组"],
+            ["雪娃娃", "妖精组"],
+            ["冰封怨灵", "妖精组"],
+            ["雪灵", "妖精组"],
+            ["大耳帽兜", "妖精组", "拟人组"],
+            ["帽兜娃娃", "妖精组", "拟人组"],
+            ["雪影娃娃", "妖精组", "拟人组"],
+            ["权杖-Ⅱ", "机械组"],
+            ["权杖-V", "机械组"],
+            ["灵狐", "动物组"],
+            ["九尾狐", "动物组"],
+            ["尖嘴狐仙", "动物组"],
+            ["里奥", "未发现"],
+            ["灵羽勇士", "未发现"],
+            ["圣羽翼王", "未发现"],
+            ["松仔", "动物组"],
+            ["松叶羊", "动物组"],
+            ["针叶巡林", "动物组"],
+            ["小勇狮", "动物组"],
+            ["炽焰狮", "动物组"],
+            ["炽心勇狮", "动物组"],
+            ["水滴蛇", "两栖组", "妖精组"],
+            ["水蛇锁", "两栖组", "妖精组"],
+            ["游蛇魔使", "两栖组", "妖精组"],
+            ["公平鸽", "天空组"],
+            ["小怂猫", "动物组", "拟人组"],
+            ["怒目怂猫", "动物组", "拟人组"],
+            ["小狮鹫", "动物组", "天空组"],
+            ["神圣狮鹫", "动物组", "天空组"],
+            ["皇家狮鹫", "动物组", "天空组"],
+            ["圆眼蜘蛛", "昆虫组"],
+            ["尖角蜘蛛", "昆虫组"],
+            ["芋香巨角蛛", "昆虫组"],
+            ["波波螺", "两栖组", "大地组"],
+            ["消波螺", "两栖组", "大地组"],
+            ["嗜波螺", "两栖组", "大地组"],
+            ["菇菇丁", "植物组"],
+            ["多菇丁", "植物组"],
+            ["九幽菇", "植物组"],
+            ["斑斑", "天空组"],
+            ["斑枭", "天空组"],
+            ["草头鸭", "两栖组", "天空组"],
+            ["卷毛鸭", "两栖组", "天空组"],
+            ["海豹战士", "动物组", "两栖组"],
+            ["海豹船长", "动物组", "两栖组"],
+            ["号儿鱼", "海洋组", "妖精组"],
+            ["圆号鱼", "海洋组", "妖精组"],
+            ["甜田螺", "妖精组", "软体组"],
+            ["壳乙螺", "妖精组", "软体组"],
+            ["卡洛儿", "妖精组", "软体组"],
+            ["棋棋", "妖精组"],
+            ["棋骑士", "妖精组"],
+            ["棋齐垒", "妖精组"],
+            ["棋祈督", "妖精组"],
+            ["棋绮后", "妖精组"],
+            ["奔波鼠", "动物组", "拟人组"],
+            ["流浪鼠", "动物组", "拟人组"],
+            ["呆小路", "动物组", "拟人组"],
+            ["舞动路路", "动物组", "拟人组"],
+            ["白发路路", "动物组", "拟人组"],
+            ["逗逗", "动物组", "巨灵组"],
+            ["气球猫", "动物组", "巨灵组"],
+            ["梦想三三", "动物组", "巨灵组"],
+            ["花怨鳗", "海洋组", "两栖组"],
+            ["鳗尾兽", "海洋组", "两栖组"],
+            ["伊雷龙", "飞龙组"],
+            ["伊兰亚龙", "飞龙组"],
+            ["拉特", "妖精组"],
+            ["酷拉", "妖精组"],
+            ["闪电环", "魔力组"],
+            ["刺电环", "魔力组"],
+            ["荆棘电环", "魔力组"],
+            ["小箱怪", "机械组", "妖精组"],
+            ["迷迷箱怪", "机械组", "妖精组"],
+            ["古钟蛇", "动物组", "两栖组"],
+            ["寒音蛇", "动物组", "两栖组"],
+            ["矮脚爬爬", "昆虫组", "巨灵组"],
+            ["恶魔红钻", "昆虫组", "巨灵组"],
+            ["火尾瓦特", "巨灵组"],
+            ["火尾战士", "巨灵组"],
+            ["烈火守护", "巨灵组"],
+            ["里拉鳐", "海洋组", "妖精组"],
+            ["海枝枝", "海洋组", "植物组"],
+            ["多西", "机械组", "巨灵组"],
+            ["库多西", "机械组", "巨灵组"],
+            ["波多西", "机械组", "巨灵组"],
+            ["小翼龙", "天空组", "飞龙组"],
+            ["翼龙", "天空组", "飞龙组"],
+            ["电动长颈鹿", "动物组"],
+            ["奔乐鹿", "动物组"],
+            ["爵士鹿", "动物组"],
+            ["缇塔", "机械组"],
+            ["声波缇塔", "机械组"],
+            ["小鹬", "天空组"],
+            ["鄙目鹬", "天空组"],
+            ["高脚鹬", "天空组"],
+            ["脆筒甜甜", "软体组", "魔力组"],
+            ["香草甜甜", "软体组", "魔力组"],
+            ["圣代甜甜", "软体组", "魔力组"],
+            ["刺轮砣", "海洋组"],
+            ["月亮砣", "海洋组"],
+            ["豆丁鱼", "海洋组", "飞龙组"],
+            ["快鳍鱼", "海洋组", "飞龙组"],
+            ["龙鱼", "海洋组", "飞龙组"],
+            ["胆小鳗鱼", "海洋组"],
+            ["闪电鳗鱼", "海洋组"],
+            ["翡翠水母", "海洋组", "软体组"],
+            ["琉璃水母", "海洋组", "软体组"],
+            ["裘洛", "动物组", "妖精组"],
+            ["裘力", "动物组", "妖精组"],
+            ["裘卡", "动物组", "妖精组"],
+            ["可爱猿", "巨灵组", "拟人组"],
+            ["炽热猿", "巨灵组", "拟人组"],
+            ["火焰猿", "巨灵组", "拟人组"],
+            ["布鲁斯", "软体组", "海洋组"],
+            ["雪顶布鲁斯", "软体组", "海洋组"],
+            ["冰钻布鲁斯", "软体组", "海洋组"],
+            ["治愈兔", "动物组", "妖精组"],
+            ["红丝绒", "动物组", "妖精组"],
+            ["红绒十字", "动物组", "妖精组"],
+            ["乌达", "巨灵组"],
+            ["迷你乌", "巨灵组"],
+            ["乌拉塔", "巨灵组"],
+            ["螺旋帕帕", "机械组", "天空组"],
+            ["帕帕斯卡", "机械组", "天空组"],
+            ["机械方方", "机械组", "拟人组"],
+            ["多彩方方", "机械组", "拟人组"],
+            ["立方人", "机械组", "拟人组"],
+            ["可立鸡", "天空组", "拟人组"],
+            ["晕晕鸡", "天空组", "拟人组"],
+            ["绅士鸡", "天空组", "拟人组"],
+            ["武者鸡", "天空组", "拟人组"],
+            ["优优", "动物组"],
+            ["绒光优优", "动物组"],
+            ["噼啪鸟", "天空组", "巨灵组"],
+            ["深蓝鲸", "海洋组", "巨灵组"],
+            ["格兰种子", "植物组", "妖精组"],
+            ["格兰花", "植物组", "妖精组"],
+            ["格兰球", "植物组", "妖精组"],
+            ["地鼠", "动物组"],
+            ["遁鼠", "动物组"],
+            ["遁地鼠", "动物组"],
+            ["墨鱿士", "海洋组", "软体组"],
+            ["混乱鱿彩", "海洋组", "软体组"],
+            ["秩序鱿墨", "海洋组", "软体组"],
+            ["小甲虫", "昆虫组", "天空组"],
+            ["铠甲虫", "昆虫组", "天空组"],
+            ["圣剑侍从", "机械组", "巨灵组"],
+            ["圣剑-X", "机械组", "巨灵组"],
+            ["吸泥鸥", "天空组", "两栖组"],
+            ["泥吼牙", "天空组", "两栖组"],
+            ["大头骨龙", "飞龙组", "巨灵组"],
+            ["寂灭骨龙", "飞龙组", "巨灵组"],
+            ["厉毒小萝", "拟人组", "天空组"],
+            ["厉毒修萝", "拟人组", "天空组"],
+            ["小帕尔", "未发现"],
+            ["帕尔萨斯", "未发现"],
+            ["龙息帕尔", "未发现"],
+            ["毛头小蛛", "昆虫组", "妖精组"],
+            ["捕尘长绒", "昆虫组", "妖精组"],
+            ["食尘短绒", "昆虫组", "妖精组"],
+            ["画精灵", "妖精组", "巨灵组"],
+            ["画像守护", "妖精组", "巨灵组"],
+            ["画间法师手", "妖精组", "巨灵组"],
+            ["画间沉铁兽", "妖精组", "巨灵组"],
+            ["书魔虫", "妖精组", "巨灵组"],
+            ["书卷守护", "妖精组", "巨灵组"],
+            ["古卷执政官", "妖精组", "巨灵组"],
+            ["古卷匣魔像", "妖精组", "巨灵组"],
+            ["绒绒", "未发现"],
+            ["小绒茧", "未发现"],
+            ["绒仙子", "未发现"],
+            ["犀角鸟", "未发现"],
+            ["光纤兽", "未发现"],
+            ["疾光千兽", "未发现"],
+            ["果冻", "海洋组", "魔力组"],
+            ["抹茶布丁", "海洋组", "魔力组"],
+            ["椰浆布丁", "海洋组"],
+            ["熔岩布丁", "海洋组"],
+            ["星尘虫", "昆虫组"],
+            ["落星虫", "昆虫组"],
+            ["陨星虫", "昆虫组"],
+            ["双灯鱼", "海洋组"],
+            ["利灯鱼", "海洋组"],
+            ["月牙雪熊", "动物组", "巨灵组"],
+            ["嗜光嗡嗡", "昆虫组"],
+            ["窃光蚊", "昆虫组"],
+            ["柴渣虫", "昆虫组", "植物组"],
+            ["燃薪虫", "昆虫组", "植物组"],
+            ["空空颅", "魔力组", "巨灵组"],
+            ["夜宿颅", "魔力组", "巨灵组"],
+            ["夜枭", "魔力组", "巨灵组"],
+            ["粉粉星", "妖精组", "软体组"],
+            ["小皮球", "妖精组", "软体组"],
+            ["贝瑟", "机械组"],
+            ["贝加尔", "机械组"],
+            ["贝古斯", "机械组"],
+            ["粉星仔", "妖精组", "天空组"],
+            ["粉耳星兔", "妖精组", "天空组"],
+            ["落陨星兔", "妖精组", "天空组"],
+            ["布瓜蝌", "两栖组"],
+            ["上岸蛙", "两栖组"],
+            ["火红尾", "动物组"],
+            ["雅丹鬃", "动物组"],
+            ["春团", "动物组", "妖精组"],
+            ["春兔", "动物组", "妖精组"],
+            ["春花兔", "动物组", "妖精组"],
+            ["幽星光", "妖精组", "巨灵组"],
+            ["曜星光", "妖精组", "巨灵组"],
+            ["暮星辰", "妖精组", "巨灵组"],
+            ["钨丝贝贝", "未发现"],
+            ["辉光幕机", "未发现"],
+            ["机幕方舟", "未发现"],
+            ["凡雀", "未发现"],
+            ["紫翎鹰", "未发现"],
+            ["凡鹰", "未发现"],
+            ["小雪人", "未发现"],
+            ["雪怪", "未发现"],
+            ["爆焰仔", "未发现"],
+            ["爆焰喷喷", "未发现"],
+            ["猴麦仔", "动物组", "机械组"],
+            ["音碟吼", "动物组", "机械组"],
+            ["加油海葵", "妖精组", "两栖组"],
+            ["加油蟹", "妖精组", "两栖组"],
+            ["小丑豆豆", "妖精组", "拟人组"],
+            ["小丑兔", "妖精组", "拟人组"],
+            ["小丑公爵", "妖精组", "拟人组"],
+            ["烟花团", "机械组", "魔力组"],
+            ["烟花伯爵", "机械组", "魔力组"],
+            ["咕咕帽", "妖精组"],
+            ["咕德帽帽", "妖精组"],
+            ["炫光迪迪", "动物组", "大地组"],
+            ["霹雳迪迪", "动物组", "大地组"],
+            ["小鼓象", "动物组", "机械组"],
+            ["巨鼓象", "动物组", "机械组"],
+            ["牵线木偶", "妖精组", "拟人组"],
+            ["帅帅魔偶", "妖精组", "拟人组"],
+            ["学院呱呱", "未发现"],
+            ["烈钻鸟", "天空组", "动物组"],
+            ["长尾火鸟", "天空组", "动物组"],
+            ["火羽", "天空组", "动物组"],
+            ["叮叮卯", "昆虫组", "机械组"],
+            ["飞飞钥", "昆虫组", "机械组"],
+            ["碎晶蝎", "昆虫组", "大地组"],
+            ["晶尾蝎", "昆虫组", "大地组"],
+            ["蝎子王", "昆虫组", "大地组"],
+            ["森豆丁", "巨灵组", "拟人组"],
+            ["森蛮人", "巨灵组", "拟人组"],
+            ["森巨人", "巨灵组", "拟人组"],
+            ["霹雳宝宝", "巨灵组", "拟人组"],
+            ["雷鸣小子", "巨灵组", "拟人组"],
+            ["雷神之子", "巨灵组", "拟人组"],
+            ["雪灵兽", "动物组"],
+            ["幻雪兽", "动物组"],
+            ["饮雪狂兽", "动物组"],
+            ["火豆丁", "巨灵组", "拟人组"],
+            ["火蛮人", "巨灵组", "拟人组"],
+            ["火巨人", "巨灵组", "拟人组"],
+            ["友爱天天", "天空组", "妖精组"],
+            ["友爱星飞", "天空组", "妖精组"],
+            ["莫比乌乌", "妖精组", "飞龙组"],
+            ["克莱因龙", "妖精组", "飞龙组"],
+            ["瑰眼仔", "巨灵组", "昆虫组"],
+            ["耳翎瑰魅", "巨灵组", "昆虫组"],
+            ["邪眼巨魔", "巨灵组", "昆虫组"],
+            ["觅觅蝠", "巨灵组", "天空组"],
+            ["翻翻蝠", "巨灵组", "天空组"],
+            ["夜游魔", "巨灵组", "天空组"],
+            ["芽眼魔", "巨灵组", "妖精组"],
+            ["叶眼魔", "巨灵组", "妖精组"],
+            ["障眼魔", "巨灵组", "妖精组"],
+            ["星云旅者", "妖精组", "魔力组"],
+            ["点点", "动物组", "妖精组"],
+            ["珀尔鼬", "动物组", "妖精组"],
+            ["不咕钟", "天空组", "机械组"],
+            ["溯源钟", "天空组", "机械组"],
+            ["加灵", "未发现"],
+            ["加益", "未发现"],
+            ["加尔", "未发现"],
+            ["黑化加尔", "未发现"],
+            ["咬咬小子", "未发现"],
+            ["胡桃王子", "未发现"],
+            ["足尖元件", "未发现"],
+            ["离心舞者", "未发现"],
+            ["蝴蝶陶陶", "动物组", "拟人组"],
+            ["铆钉毛毛", "动物组", "拟人组"],
+            ["徘徊爪爪", "动物组", "拟人组"],
+            ["苞米仔", "植物组", "拟人组"],
+            ["炮米花", "植物组", "拟人组"],
+            ["十字蝌蚪", "两栖组", "拟人组"],
+            ["十字蛙", "两栖组", "拟人组"],
+            ["深渊蛙", "两栖组", "拟人组"],
+            ["卡波", "妖精组"],
+            ["卡拉波斯", "妖精组"],
+            ["守夜烛", "妖精组"],
+            ["流明坎德拉", "妖精组"],
+            ["蜜果骸", "妖精组", "植物组"],
+            ["半朽蜜果灵", "妖精组", "植物组"],
+            ["稻草人", "妖精组"],
+            ["稻草守护者", "妖精组"],
+            ["栗鼠", "动物组"],
+            ["壳栗丝鼠", "动物组"],
+            ["睡铃雪影娃娃", "未发现"],
+            ["宝藏小狐", "动物组"],
+            ["宝藏沙狐", "动物组"]
+        ];
+
+        // ================================================================
+        //  性格数据（根据图片表格）
+        // ================================================================
+        const NATURE_DATA = [
+            { name: '大胆', plus: '物攻▲', minus: '物防▼' },
+            { name: '固执', plus: '物攻▲', minus: '魔攻▼' },
+            { name: '调皮', plus: '物攻▲', minus: '魔防▼' },
+            { name: '勇敢', plus: '物攻▲', minus: '速度▼' },
+            { name: '逞强', plus: '物攻▲', minus: '生命▼' },
+            { name: '稳重', plus: '物防▲', minus: '物攻▼' },
+            { name: '天真', plus: '物防▲', minus: '魔攻▼' },
+            { name: '懒散', plus: '物防▲', minus: '魔防▼' },
+            { name: '悠闲', plus: '物防▲', minus: '速度▼' },
+            { name: '坦率', plus: '物防▲', minus: '生命▼' },
+            { name: '聪明', plus: '魔攻▲', minus: '物攻▼' },
+            { name: '专注', plus: '魔攻▲', minus: '物防▼' },
+            { name: '偏执', plus: '魔攻▲', minus: '魔防▼' },
+            { name: '冷静', plus: '魔攻▲', minus: '速度▼' },
+            { name: '理性', plus: '魔攻▲', minus: '生命▼' },
+            { name: '警惕', plus: '魔防▲', minus: '物攻▼' },
+            { name: '温顺', plus: '魔防▲', minus: '物防▼' },
+            { name: '害羞', plus: '魔防▲', minus: '魔攻▼' },
+            { name: '慎重', plus: '魔防▲', minus: '速度▼' },
+            { name: '焦虑', plus: '魔防▲', minus: '生命▼' },
+            { name: '胆小', plus: '速度▲', minus: '物攻▼' },
+            { name: '急躁', plus: '速度▲', minus: '物防▼' },
+            { name: '开朗', plus: '速度▲', minus: '魔攻▼' },
+            { name: '莽撞', plus: '速度▲', minus: '魔防▼' },
+            { name: '热情', plus: '速度▲', minus: '生命▼' },
+            { name: '沉默', plus: '生命▲', minus: '物攻▼' },
+            { name: '忧郁', plus: '生命▲', minus: '物防▼' },
+            { name: '平和', plus: '生命▲', minus: '魔攻▼' },
+            { name: '粗心', plus: '生命▲', minus: '魔防▼' },
+            { name: '踏实', plus: '生命▲', minus: '速度▼' }
+        ];
+        const NATURE_NAME_LIST = NATURE_DATA.map(n => n.name);
+        const NATURE_MAP = Object.fromEntries(NATURE_DATA.map(n => [n.name, n]));
+
+        // ================================================================
+        //  JavaScript 逻辑
+        // ================================================================
+
+        (function() {
+            'use strict';
+
+            // -------- DOM 引用 --------
+            const $ = id => document.getElementById(id);
+            const nameInput = $('pokemonNameInput');
+            const pokemonSuggestions = $('pokemonSuggestionsList');
+            const natureInput = $('natureInput');
+            const natureSuggestions = $('natureSuggestionsList');
+            const genderSelect = $('genderSelect');
+            const bodyMedalSelect = $('bodyMedalSelect');
+            const voiceMedalSelect = $('voiceMedalSelect');
+            const addForm = $('addForm');
+            const addBtn = $('addBtn');
+            const pokemonTable = $('pokemonTable');
+            const pokemonTableBody = $('pokemonTableBody');
+            const emptyList = $('emptyList');
+            const listCount = $('listCount');
+            const analyzeBtn = $('analyzeBtn');
+            const clearResultBtn = $('clearResultBtn');
+            const resultGrid = $('resultGrid');
+            const emptyResult = $('emptyResult');
+            const resultBadge = $('resultBadge');
+            const clearAllBtn = $('clearAllBtn');
+            const toast = $('toast');
+            const totalPokemonCount = $('totalPokemonCount');
+            const totalGroupCount = $('totalGroupCount');
+            const undiscoveredCount = $('undiscoveredCount');
+            const filterType = $('filterType');
+            const searchName = $('searchName');
+            const filterBar = $('filterBar');
+            const toggleListBtn = $('toggleListBtn');
+            const listCollapsible = $('listCollapsible');
+
+            // -------- 数据状态 --------
+            let eggData = [];
+            let nameList = [];
+            let userPokemons = [];
+            let idCounter = 0;
+            let currentPairs = [];
+            let listCollapsed = false;
+
+            // -------- 存储键 --------
+            const STORAGE_KEY_POKEMON = 'eggGeneticsPokemons_v3';
+            const STORAGE_KEY_ID = 'eggGeneticsIdCounter_v3';
+
+            // -------- 工具函数 --------
+            function toastMessage(msg, type = 'info', duration = 2800) {
+                toast.textContent = msg;
+                toast.className = 'toast';
+                if (type === 'success') toast.classList.add('success');
+                else if (type === 'error') toast.classList.add('error');
+                else if (type === 'warning') toast.classList.add('warning');
+                toast.classList.add('show');
+                clearTimeout(toast._timer);
+                toast._timer = setTimeout(() => toast.classList.remove('show'), duration);
+            }
+
+            function genId() { return ++idCounter; }
+
+            // -------- 数据初始化：合并同名精灵蛋组 --------
+            function initEggData() {
+                const map = new Map();
+                for (const item of EMBEDDED_DATA) {
+                    const name = item[0];
+                    const groups = item.slice(1);
+                    if (map.has(name)) {
+                        const existing = map.get(name);
+                        for (const g of groups) {
+                            if (!existing.includes(g)) existing.push(g);
+                        }
+                    } else {
+                        map.set(name, [...groups]);
+                    }
+                }
+                eggData = [];
+                for (const [name, groups] of map) {
+                    eggData.push({ name, groups });
+                }
+                nameList = eggData.map(d => d.name).sort();
+                return eggData;
+            }
+
+            // -------- 获取精灵蛋组 --------
+            function getPokemonGroups(name) {
+                const found = eggData.find(d => d.name === name);
+                return found ? found.groups : [];
+            }
+
+            // -------- 获取性格信息 --------
+            function getNatureInfo(name) {
+                return NATURE_MAP[name] || null;
+            }
+
+            // -------- 统计信息 --------
+            function updateStats() {
+                totalPokemonCount.textContent = eggData.length;
+                const allGroups = new Set();
+                let undiscovered = 0;
+                for (const d of eggData) {
+                    for (const g of d.groups) {
+                        allGroups.add(g);
+                    }
+                    if (d.groups.includes('未发现')) undiscovered++;
+                }
+                totalGroupCount.textContent = allGroups.size;
+                undiscoveredCount.textContent = undiscovered;
+            }
+
+            // -------- 本地存储 --------
+            function loadPokemonsFromStorage() {
+                try {
+                    const data = localStorage.getItem(STORAGE_KEY_POKEMON);
+                    if (data) {
+                        const parsed = JSON.parse(data);
+                        if (Array.isArray(parsed)) {
+                            userPokemons = parsed;
+                            return true;
+                        }
+                    }
+                } catch (_) { /* ignore */ }
+                return false;
+            }
+
+            function loadIdFromStorage() {
+                try {
+                    const val = localStorage.getItem(STORAGE_KEY_ID);
+                    if (val) {
+                        idCounter = parseInt(val, 10) || 0;
+                        return true;
+                    }
+                } catch (_) { /* ignore */ }
+                return false;
+            }
+
+            function savePokemonsToStorage() {
+                try {
+                    localStorage.setItem(STORAGE_KEY_POKEMON, JSON.stringify(userPokemons));
+                    localStorage.setItem(STORAGE_KEY_ID, String(idCounter));
+                } catch (_) { /* ignore */ }
+            }
+
+            // -------- 折叠切换 --------
+            function toggleList() {
+                listCollapsed = !listCollapsed;
+                if (listCollapsed) {
+                    listCollapsible.classList.add('collapsed');
+                    toggleListBtn.textContent = '▶ 展开';
+                } else {
+                    listCollapsible.classList.remove('collapsed');
+                    toggleListBtn.textContent = '▼ 折叠';
+                }
+            }
+
+            // ============================================================
+            //  精灵名称自动补全
+            // ============================================================
+            let pokemonSuggestionIndex = -1;
+
+            function renderPokemonSuggestions(filter) {
+                const val = filter.trim().toLowerCase();
+                if (val === '') {
+                    pokemonSuggestions.style.display = 'none';
+                    return;
+                }
+                const matches = nameList.filter(name => name.toLowerCase().includes(val));
+                if (matches.length === 0) {
+                    pokemonSuggestions.innerHTML = `<div class="no-match">😕 没有匹配的精灵</div>`;
+                    pokemonSuggestions.style.display = 'block';
+                    return;
+                }
+                const limited = matches.slice(0, 15);
+                let html = '';
+                for (const name of limited) {
+                    const groups = getPokemonGroups(name);
+                    const isUndiscovered = groups.includes('未发现');
+                    const groupStr = groups.join(' · ');
+                    html += `<div class="suggestion-item" data-name="${name}">
+                                <span>${name}</span>
+                                <span class="group-hint">
+                                    ${groupStr}
+                                    ${isUndiscovered ? '<span class="tag undiscovered">未发现</span>' : ''}
+                                </span>
+                            </div>`;
+                }
+                if (matches.length > 15) {
+                    html += `<div class="no-match">⋯ 还有 ${matches.length - 15} 个匹配项</div>`;
+                }
+                pokemonSuggestions.innerHTML = html;
+                pokemonSuggestions.style.display = 'block';
+                pokemonSuggestionIndex = -1;
+            }
+
+            function selectPokemonSuggestion(name) {
+                nameInput.value = name;
+                pokemonSuggestions.style.display = 'none';
+                nameInput.focus();
+                nameInput.dispatchEvent(new Event('input'));
+            }
+
+            function highlightPokemonItem(items, idx) {
+                items.forEach((el, i) => {
+                    el.style.background = (i === idx) ? 'var(--primary-light)' : '';
+                });
+                if (idx >= 0 && idx < items.length) {
+                    items[idx].scrollIntoView({ block: 'nearest' });
+                }
+            }
+
+            nameInput.addEventListener('input', function() {
+                renderPokemonSuggestions(this.value);
+            });
+
+            nameInput.addEventListener('keydown', function(e) {
+                const items = pokemonSuggestions.querySelectorAll('.suggestion-item');
+                if (items.length === 0) return;
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    pokemonSuggestionIndex = Math.min(pokemonSuggestionIndex + 1, items.length - 1);
+                    highlightPokemonItem(items, pokemonSuggestionIndex);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    pokemonSuggestionIndex = Math.max(pokemonSuggestionIndex - 1, -1);
+                    highlightPokemonItem(items, pokemonSuggestionIndex);
+                } else if (e.key === 'Enter') {
+                    if (pokemonSuggestionIndex >= 0 && pokemonSuggestionIndex < items.length) {
+                        e.preventDefault();
+                        const name = items[pokemonSuggestionIndex].dataset.name;
+                        selectPokemonSuggestion(name);
+                    }
+                } else if (e.key === 'Escape') {
+                    pokemonSuggestions.style.display = 'none';
+                }
+            });
+
+            pokemonSuggestions.addEventListener('click', function(e) {
+                const item = e.target.closest('.suggestion-item');
+                if (item) {
+                    selectPokemonSuggestion(item.dataset.name);
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#pokemonNameInput') && !e.target.closest('#pokemonSuggestionsList')) {
+                    pokemonSuggestions.style.display = 'none';
+                }
+            });
+
+            nameInput.addEventListener('blur', function() {
+                setTimeout(() => { pokemonSuggestions.style.display = 'none'; }, 200);
+            });
+
+            // ============================================================
+            //  性格自动补全
+            // ============================================================
+            let natureSuggestionIndex = -1;
+
+            function renderNatureSuggestions(filter) {
+                const val = filter.trim().toLowerCase();
+                if (val === '') {
+                    natureSuggestions.style.display = 'none';
+                    return;
+                }
+                const matches = NATURE_NAME_LIST.filter(name => name.toLowerCase().includes(val));
+                if (matches.length === 0) {
+                    natureSuggestions.innerHTML = `<div class="no-match">😕 没有匹配的性格</div>`;
+                    natureSuggestions.style.display = 'block';
+                    return;
+                }
+                const limited = matches.slice(0, 15);
+                let html = '';
+                for (const name of limited) {
+                    const info = getNatureInfo(name);
+                    if (!info) continue;
+                    html += `<div class="suggestion-item" data-name="${name}">
+                                <span>${name}</span>
+                                <span class="group-hint">
+                                    <span class="plus">${info.plus}</span>
+                                    <span class="minus">${info.minus}</span>
+                                </span>
+                            </div>`;
+                }
+                if (matches.length > 15) {
+                    html += `<div class="no-match">⋯ 还有 ${matches.length - 15} 个匹配项</div>`;
+                }
+                natureSuggestions.innerHTML = html;
+                natureSuggestions.style.display = 'block';
+                natureSuggestionIndex = -1;
+            }
+
+            function selectNatureSuggestion(name) {
+                natureInput.value = name;
+                natureSuggestions.style.display = 'none';
+                natureInput.focus();
+                natureInput.dispatchEvent(new Event('input'));
+            }
+
+            function highlightNatureItem(items, idx) {
+                items.forEach((el, i) => {
+                    el.style.background = (i === idx) ? 'var(--primary-light)' : '';
+                });
+                if (idx >= 0 && idx < items.length) {
+                    items[idx].scrollIntoView({ block: 'nearest' });
+                }
+            }
+
+            natureInput.addEventListener('input', function() {
+                renderNatureSuggestions(this.value);
+            });
+
+            natureInput.addEventListener('keydown', function(e) {
+                const items = natureSuggestions.querySelectorAll('.suggestion-item');
+                if (items.length === 0) return;
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    natureSuggestionIndex = Math.min(natureSuggestionIndex + 1, items.length - 1);
+                    highlightNatureItem(items, natureSuggestionIndex);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    natureSuggestionIndex = Math.max(natureSuggestionIndex - 1, -1);
+                    highlightNatureItem(items, natureSuggestionIndex);
+                } else if (e.key === 'Enter') {
+                    if (natureSuggestionIndex >= 0 && natureSuggestionIndex < items.length) {
+                        e.preventDefault();
+                        const name = items[natureSuggestionIndex].dataset.name;
+                        selectNatureSuggestion(name);
+                    }
+                } else if (e.key === 'Escape') {
+                    natureSuggestions.style.display = 'none';
+                }
+            });
+
+            natureSuggestions.addEventListener('click', function(e) {
+                const item = e.target.closest('.suggestion-item');
+                if (item) {
+                    selectNatureSuggestion(item.dataset.name);
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#natureInput') && !e.target.closest('#natureSuggestionsList')) {
+                    natureSuggestions.style.display = 'none';
+                }
+            });
+
+            natureInput.addEventListener('blur', function() {
+                setTimeout(() => { natureSuggestions.style.display = 'none'; }, 200);
+            });
+
+            // ============================================================
+            //  渲染精灵列表
+            // ============================================================
+            function renderPokemonList() {
+                const tbody = pokemonTableBody;
+                if (userPokemons.length === 0) {
+                    pokemonTable.style.display = 'none';
+                    emptyList.style.display = 'block';
+                    listCount.textContent = '0 只';
+                    return;
+                }
+                pokemonTable.style.display = 'table';
+                emptyList.style.display = 'none';
+                listCount.textContent = userPokemons.length + ' 只';
+
+                tbody.innerHTML = '';
+                userPokemons.forEach((p, idx) => {
+                    const tr = document.createElement('tr');
+                    const genderLabel = p.gender === '公' ? '♂ 公' : '♀ 母';
+                    const genderClass = p.gender === '公' ? 'male' : 'female';
+
+                    const bodyTag = p.bodyMedal === '无' ?
+                        '<span class="medal-tag none">无</span>' :
+                        `<span class="medal-tag body">${p.bodyMedal}</span>`;
+
+                    const voiceTag = p.voiceMedal === '无' ?
+                        '<span class="medal-tag none">无</span>' :
+                        `<span class="medal-tag voice">${p.voiceMedal}</span>`;
+
+                    let natureHtml = '';
+                    if (p.nature && p.nature.trim()) {
+                        const info = getNatureInfo(p.nature.trim());
+                        if (info) {
+                            natureHtml =
+                                `<span class="nature-tag">${p.nature} <span class="eff plus">${info.plus}</span><span class="eff minus">${info.minus}</span></span>`;
+                        } else {
+                            natureHtml = `<span class="nature-tag">${p.nature}</span>`;
+                        }
+                    } else {
+                        natureHtml = '<span class="medal-tag none">未设定</span>';
+                    }
+
+                    tr.innerHTML = `
+                                <td>${idx + 1}</td>
+                                <td><strong>${p.name}</strong></td>
+                                <td><span class="gender-tag ${genderClass}">${genderLabel}</span></td>
+                                <td>${bodyTag}</td>
+                                <td>${voiceTag}</td>
+                                <td>${natureHtml}</td>
+                                <td style="text-align:center;">
+                                    <button class="btn btn-danger btn-sm" data-id="${p.id}">删除</button>
+                                </td>
+                            `;
+                    tbody.appendChild(tr);
+                });
+
+                tbody.querySelectorAll('[data-id]').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id, 10);
+                        deletePokemon(id);
+                    });
+                });
+            }
+
+            // -------- 删除精灵 --------
+            function deletePokemon(id) {
+                userPokemons = userPokemons.filter(p => p.id !== id);
+                savePokemonsToStorage();
+                renderPokemonList();
+                updateResultBadge();
+                clearResults();
+                toastMessage('已删除该精灵', 'success');
+            }
+
+            // -------- 清空所有精灵 --------
+            function clearAllPokemons() {
+                if (userPokemons.length === 0) {
+                    toastMessage('没有精灵需要清除', 'warning');
+                    return;
+                }
+                if (!confirm('确定要清除所有已输入的精灵吗？')) return;
+                userPokemons = [];
+                savePokemonsToStorage();
+                renderPokemonList();
+                clearResults();
+                updateResultBadge();
+                toastMessage('已清空所有精灵', 'success');
+            }
+
+            // -------- 清空结果 --------
+            function clearResults() {
+                currentPairs = [];
+                resultGrid.style.display = 'none';
+                emptyResult.style.display = 'block';
+                resultBadge.textContent = '待分析';
+                resultBadge.className = 'badge';
+                filterBar.style.display = 'none';
+            }
+
+            // -------- 更新结果徽章 --------
+            function updateResultBadge() {
+                if (userPokemons.length === 0) {
+                    resultBadge.textContent = '无精灵';
+                    resultBadge.className = 'badge warning';
+                    return;
+                }
+                const males = userPokemons.filter(p => p.gender === '公').length;
+                const females = userPokemons.filter(p => p.gender === '母').length;
+                if (males === 0 || females === 0) {
+                    resultBadge.textContent = `♂${males} ♀${females} 需公母各至少一只`;
+                    resultBadge.className = 'badge warning';
+                } else {
+                    resultBadge.textContent = `♂${males} ♀${females} 可分析`;
+                    resultBadge.className = 'badge success';
+                }
+            }
+
+            // ============================================================
+            //  核心配对分析（只保留奖牌相同的配对）
+            // ============================================================
+            function analyzePairs() {
+                const males = userPokemons.filter(p => p.gender === '公');
+                const females = userPokemons.filter(p => p.gender === '母');
+
+                if (males.length === 0 || females.length === 0) {
+                    return { pairs: [], message: '需要至少一只公精灵和一只母精灵才能配对。' };
+                }
+
+                const results = [];
+
+                for (const male of males) {
+                    for (const female of females) {
+                        if (male.id === female.id) continue;
+
+                        const maleGroups = getPokemonGroups(male.name);
+                        const femaleGroups = getPokemonGroups(female.name);
+
+                        if (maleGroups.includes('未发现') || femaleGroups.includes('未发现')) continue;
+
+                        const common = maleGroups.filter(g => femaleGroups.includes(g));
+                        if (common.length === 0) continue;
+
+                        let inheritBody = null;
+                        let inheritVoice = null;
+
+                        if (male.bodyMedal !== '无' && female.bodyMedal !== '无' && male.bodyMedal === female.bodyMedal) {
+                            inheritBody = male.bodyMedal;
+                        }
+
+                        if (male.voiceMedal !== '无' && female.voiceMedal !== '无' && male.voiceMedal === female.voiceMedal) {
+                            inheritVoice = male.voiceMedal;
+                        }
+
+                        // 只保留至少有一个奖牌相同的配对
+                        if (inheritBody === null && inheritVoice === null) continue;
+
+                        let inheritNature = null;
+                        if (male.nature && female.nature && male.nature.trim() === female.nature.trim() && male.nature
+                            .trim() !== '') {
+                            inheritNature = male.nature.trim();
+                        }
+
+                        results.push({
+                            male: male,
+                            female: female,
+                            commonGroups: common,
+                            inheritBody: inheritBody,
+                            inheritVoice: inheritVoice,
+                            inheritNature: inheritNature,
+                            isStable: (inheritNature !== null)
+                        });
+                    }
+                }
+
+                return { pairs: results, message: results.length === 0 ? '没有找到奖牌相同的配对组合。' : null };
+            }
+
+            // ============================================================
+            //  渲染配对结果（支持筛选和排序）
+            // ============================================================
+            function renderResults(pairs) {
+                if (pairs.length === 0) {
+                    emptyResult.style.display = 'block';
+                    resultGrid.style.display = 'none';
+                    resultBadge.textContent = '无配对';
+                    resultBadge.className = 'badge warning';
+                    emptyResult.querySelector('.icon').textContent = '🔍';
+                    emptyResult.innerHTML = `<span class="icon">🔍</span>没有找到奖牌相同的配对。<br><span class="text-muted">请确保公母精灵有相同的蛋组且至少一个奖牌相同（非"未发现"）。</span>`;
+                    filterBar.style.display = 'none';
+                    return;
+                }
+
+                // 按稳定遗传优先排序（stable在前）
+                const sorted = [...pairs].sort((a, b) => (b.isStable ? 1 : 0) - (a.isStable ? 1 : 0));
+
+                resultBadge.textContent = `${pairs.length} 个配对${pairs.some(p => p.isStable) ? ' ⭐ 含稳定遗传' : ''}`;
+                resultBadge.className = 'badge success';
+                emptyResult.style.display = 'none';
+                resultGrid.style.display = 'grid';
+                resultGrid.innerHTML = '';
+                filterBar.style.display = 'flex';
+
+                // 应用筛选
+                const type = filterType.value;
+                const search = searchName.value.trim().toLowerCase();
+                let filtered = sorted;
+                if (type === 'stable') {
+                    filtered = filtered.filter(p => p.isStable);
+                }
+                if (search) {
+                    filtered = filtered.filter(p =>
+                        p.male.name.toLowerCase().includes(search) ||
+                        p.female.name.toLowerCase().includes(search)
+                    );
+                }
+
+                if (filtered.length === 0) {
+                    resultGrid.innerHTML =
+                        `<div class="empty-state" style="grid-column:1/-1;"><span class="icon">🔍</span>没有匹配筛选条件的配对。</div>`;
+                    return;
+                }
+
+                for (const pair of filtered) {
+                    const div = document.createElement('div');
+                    div.className = 'result-item' + (pair.isStable ? ' stable-pair' : '');
+
+                    const male = pair.male;
+                    const female = pair.female;
+
+                    const bodyInherit = pair.inheritBody ?
+                        `<span class="val">${pair.inheritBody}</span>` :
+                        '<span class="val none">无</span>';
+                    const voiceInherit = pair.inheritVoice ?
+                        `<span class="val">${pair.inheritVoice}</span>` :
+                        '<span class="val none">无</span>';
+                    const natureInherit = pair.inheritNature ?
+                        `<span class="val">${pair.inheritNature}</span>` :
+                        '<span class="val none">无</span>';
+
+                    const groupsHtml = pair.commonGroups.map(g =>
+                        `<span class="group-tag">${g}</span>`
+                    ).join('');
+
+                    const maleNatureInfo = male.nature ? getNatureInfo(male.nature) : null;
+                    const femaleNatureInfo = female.nature ? getNatureInfo(female.nature) : null;
+                    const maleNatureStr = maleNatureInfo ?
+                        `${male.nature} (${maleNatureInfo.plus} ${maleNatureInfo.minus})` :
+                        (male.nature || '无');
+                    const femaleNatureStr = femaleNatureInfo ?
+                        `${female.nature} (${femaleNatureInfo.plus} ${femaleNatureInfo.minus})` :
+                        (female.nature || '无');
+
+                    const stableBadge = pair.isStable ?
+                        `<span class="stable-badge">⭐ 稳定遗传</span>` :
+                        '';
+
+                    div.innerHTML = `
+                                <div class="pair-header">
+                                    <span>${male.name} <span class="gender-tag male">♂ 公</span></span>
+                                    <span class="vs">×</span>
+                                    <span>${female.name} <span class="gender-tag female">♀ 母</span></span>
+                                    ${stableBadge}
+                                    <span style="font-weight:400;font-size:13px;color:var(--gray-500);">
+                                        共同蛋组: <span class="common-groups">${groupsHtml}</span>
+                                    </span>
+                                </div>
+                                <div class="pair-detail">
+                                    <div><span class="label">♂</span> ${male.name} 
+                                        ${male.bodyMedal !== '无' ? '🧍' + male.bodyMedal : ''} 
+                                        ${male.voiceMedal !== '无' ? '🔊' + male.voiceMedal : ''} 
+                                        ${maleNatureInfo ? '💭' + maleNatureStr : ''}
+                                    </div>
+                                    <div><span class="label">♀</span> ${female.name} 
+                                        ${female.bodyMedal !== '无' ? '🧍' + female.bodyMedal : ''} 
+                                        ${female.voiceMedal !== '无' ? '🔊' + female.voiceMedal : ''} 
+                                        ${femaleNatureInfo ? '💭' + femaleNatureStr : ''}
+                                    </div>
+                                </div>
+                                <div class="inherit">
+                                    <div class="inherit-item">
+                                        <span class="icon">🧍</span>
+                                        体型奖牌: ${bodyInherit}
+                                    </div>
+                                    <div class="inherit-item">
+                                        <span class="icon">🔊</span>
+                                        声音奖牌: ${voiceInherit}
+                                    </div>
+                                    <div class="inherit-item">
+                                        <span class="icon">💭</span>
+                                        性格: ${natureInherit}
+                                    </div>
+                                </div>
+                            `;
+                    resultGrid.appendChild(div);
+                }
+            }
+
+            // ============================================================
+            //  执行分析并应用筛选
+            // ============================================================
+            function performAnalysis() {
+                if (userPokemons.length === 0) {
+                    toastMessage('请先添加精灵', 'warning');
+                    return;
+                }
+                const males = userPokemons.filter(p => p.gender === '公');
+                const females = userPokemons.filter(p => p.gender === '母');
+                if (males.length === 0 || females.length === 0) {
+                    toastMessage('需要至少一只公精灵和一只母精灵才能配对', 'warning');
+                    return;
+                }
+
+                const result = analyzePairs();
+                if (result.message) {
+                    currentPairs = [];
+                    renderResults([]);
+                    toastMessage(result.message, 'warning');
+                    return;
+                }
+
+                currentPairs = result.pairs;
+                renderResults(currentPairs);
+                toastMessage(`找到 ${result.pairs.length} 个奖牌相同的配对`, 'success');
+            }
+
+            // ============================================================
+            //  添加精灵（性格必填）
+            // ============================================================
+            function addPokemon(e) {
+                e.preventDefault();
+                const name = nameInput.value.trim();
+                const gender = genderSelect.value;
+                const bodyMedal = bodyMedalSelect.value;
+                const voiceMedal = voiceMedalSelect.value;
+                const nature = natureInput.value.trim();
+
+                if (!name) {
+                    toastMessage('请输入或选择精灵名称', 'warning');
+                    nameInput.focus();
+                    return;
+                }
+
+                if (!nature) {
+                    toastMessage('请填写性格（必填）', 'warning');
+                    natureInput.focus();
+                    return;
+                }
+
+                const groups = getPokemonGroups(name);
+                if (groups.length === 0) {
+                    toastMessage(`未找到名为 "${name}" 的精灵，请从建议中选择`, 'warning');
+                    nameInput.focus();
+                    return;
+                }
+
+                const info = getNatureInfo(nature);
+                if (!info) {
+                    toastMessage(`未找到名为 "${nature}" 的性格，请从建议中选择`, 'warning');
+                    natureInput.focus();
+                    return;
+                }
+
+                const exists = userPokemons.some(p =>
+                    p.name === name &&
+                    p.gender === gender &&
+                    p.bodyMedal === bodyMedal &&
+                    p.voiceMedal === voiceMedal &&
+                    p.nature === nature
+                );
+                if (exists) {
+                    toastMessage(`已存在完全相同的精灵（${name}，${gender}，${bodyMedal}，${voiceMedal}，${nature}），请勿重复添加`, 'warning');
+                    return;
+                }
+
+                if (groups.includes('未发现')) {
+                    toastMessage(`⚠️ ${name} 属于「未发现」组，无法参与生蛋`, 'warning');
+                }
+
+                const newPokemon = {
+                    id: genId(),
+                    name: name,
+                    gender: gender,
+                    bodyMedal: bodyMedal,
+                    voiceMedal: voiceMedal,
+                    nature: nature
+                };
+
+                userPokemons.push(newPokemon);
+                savePokemonsToStorage();
+                renderPokemonList();
+                updateResultBadge();
+                clearResults();
+
+                nameInput.value = '';
+                natureInput.value = '';
+                nameInput.focus();
+
+                toastMessage(`✅ 已添加 ${gender}性 ${name}（${bodyMedal}，${voiceMedal}，${nature}）`, 'success');
+                pokemonSuggestions.style.display = 'none';
+                natureSuggestions.style.display = 'none';
+            }
+
+            // ============================================================
+            //  初始化
+            // ============================================================
+            function init() {
+                initEggData();
+                updateStats();
+
+                loadPokemonsFromStorage();
+                loadIdFromStorage();
+
+                renderPokemonList();
+                updateResultBadge();
+
+                // 折叠按钮事件
+                toggleListBtn.addEventListener('click', toggleList);
+
+                addForm.addEventListener('submit', addPokemon);
+                analyzeBtn.addEventListener('click', performAnalysis);
+
+                clearResultBtn.addEventListener('click', function() {
+                    clearResults();
+                    toastMessage('已清除结果', 'info');
+                });
+
+                clearAllBtn.addEventListener('click', clearAllPokemons);
+
+                filterType.addEventListener('change', function() {
+                    if (currentPairs.length > 0) renderResults(currentPairs);
+                });
+                searchName.addEventListener('input', function() {
+                    if (currentPairs.length > 0) renderResults(currentPairs);
+                });
+
+                nameInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        if (pokemonSuggestions.style.display === 'block' && pokemonSuggestionIndex >= 0) {
+                            const items = pokemonSuggestions.querySelectorAll('.suggestion-item');
+                            if (pokemonSuggestionIndex < items.length) {
+                                selectPokemonSuggestion(items[pokemonSuggestionIndex].dataset.name);
+                                e.preventDefault();
+                                return;
+                            }
+                        }
+                        if (this.value.trim()) {
+                            addForm.dispatchEvent(new Event('submit'));
+                            e.preventDefault();
+                        }
+                    }
+                });
+
+                natureInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        if (natureSuggestions.style.display === 'block' && natureSuggestionIndex >= 0) {
+                            const items = natureSuggestions.querySelectorAll('.suggestion-item');
+                            if (natureSuggestionIndex < items.length) {
+                                selectNatureSuggestion(items[natureSuggestionIndex].dataset.name);
+                                e.preventDefault();
+                                return;
+                            }
+                        }
+                        if (this.value.trim()) {
+                            const info = getNatureInfo(this.value.trim());
+                            if (info) {
+                                addForm.dispatchEvent(new Event('submit'));
+                                e.preventDefault();
+                            }
+                        }
+                    }
+                });
+
+                toastMessage(`✅ 已加载 ${eggData.length} 个精灵数据，输入名称自动匹配`, 'success', 2500);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+        })();
+    </script>
+</body>
+</html>
