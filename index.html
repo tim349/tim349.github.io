@@ -372,6 +372,27 @@
             height: 30px;
         }
 
+        .btn-icon {
+            padding: 0 6px;
+            height: 24px;
+            min-width: 24px;
+            font-size: 12px;
+            background: transparent;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--gray-500);
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-icon:hover {
+            background: var(--gray-200);
+            color: var(--gray-900);
+        }
+        .btn-icon.danger:hover {
+            background: #ffe4e4;
+            color: var(--danger);
+        }
+
         .data-status-bar {
             display: flex;
             flex-wrap: wrap;
@@ -658,6 +679,108 @@
             display: none;
         }
 
+        /* ===== 账号管理 ===== */
+        .account-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 20px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin-bottom: 16px;
+        }
+
+        .account-bar .current-account {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .account-bar .current-account span {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .account-bar .account-input-group {
+            display: flex;
+            gap: 8px;
+            flex: 1 1 260px;
+        }
+
+        .account-bar .account-input-group input {
+            flex: 1;
+            padding: 6px 12px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            background: #fff;
+        }
+        .account-bar .account-input-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .account-bar .account-input-group .btn {
+            height: 36px;
+            padding: 0 16px;
+            font-size: 13px;
+        }
+
+        .account-bar .account-switch-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .account-bar .account-switch-group .account-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px 4px 12px;
+            background: var(--gray-200);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--gray-700);
+            cursor: default;
+            transition: background 0.2s, color 0.2s;
+            border: 1.5px solid transparent;
+            position: relative;
+        }
+        .account-bar .account-switch-group .account-tag .tag-name {
+            cursor: pointer;
+        }
+        .account-bar .account-switch-group .account-tag .tag-name:hover {
+            text-decoration: underline;
+        }
+        .account-bar .account-switch-group .account-tag.active {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+        .account-bar .account-switch-group .account-tag .tag-actions {
+            display: flex;
+            gap: 2px;
+            margin-left: 4px;
+        }
+        .account-bar .account-switch-group .account-tag .tag-actions .btn-icon {
+            font-size: 11px;
+            padding: 0 3px;
+            height: 20px;
+            min-width: 20px;
+            color: var(--gray-500);
+        }
+        .account-bar .account-switch-group .account-tag .tag-actions .btn-icon:hover {
+            background: var(--gray-300);
+            color: var(--gray-900);
+        }
+        .account-bar .account-switch-group .account-tag .tag-actions .btn-icon.danger:hover {
+            background: #ffe4e4;
+            color: var(--danger);
+        }
+
         /* ===== Toast ===== */
         .toast {
             position: fixed;
@@ -736,6 +859,20 @@
             .card-title .toggle-btn {
                 margin-left: 0;
             }
+            .account-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .account-bar .account-input-group {
+                flex-wrap: wrap;
+            }
+            .account-bar .account-switch-group {
+                justify-content: flex-start;
+            }
+            .account-bar .account-switch-group .account-tag {
+                padding: 4px 6px 4px 10px;
+                font-size: 12px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -798,9 +935,21 @@
             </h1>
             <div class="header-actions">
                 <span class="badge success" id="dataStatus">📂 数据已加载</span>
-                <button class="btn btn-outline btn-sm" id="clearAllBtn" title="清除所有已输入的精灵">🗑️ 清空精灵</button>
+                <button class="btn btn-outline btn-sm" id="clearAllBtn" title="清除当前账号所有精灵">🗑️ 清空精灵</button>
             </div>
         </header>
+
+        <!-- ===== 账号管理 ===== -->
+        <div class="account-bar" id="accountBar">
+            <div class="current-account">👤 当前账号：<span id="currentAccountName">default</span></div>
+            <div class="account-input-group">
+                <input type="text" id="newAccountInput" placeholder="输入新账号名称..." maxlength="20">
+                <button class="btn btn-primary" id="addAccountBtn">➕ 添加</button>
+            </div>
+            <div class="account-switch-group" id="accountSwitchGroup">
+                <!-- 动态生成账号标签 -->
+            </div>
+        </div>
 
         <!-- ===== 数据状态 ===== -->
         <section class="card" id="statusCard">
@@ -1469,6 +1618,10 @@
             const filterBar = $('filterBar');
             const toggleListBtn = $('toggleListBtn');
             const listCollapsible = $('listCollapsible');
+            const currentAccountName = $('currentAccountName');
+            const newAccountInput = $('newAccountInput');
+            const addAccountBtn = $('addAccountBtn');
+            const accountSwitchGroup = $('accountSwitchGroup');
 
             // -------- 数据状态 --------
             let eggData = [];
@@ -1477,10 +1630,12 @@
             let idCounter = 0;
             let currentPairs = [];
             let listCollapsed = false;
+            let currentAccount = 'default';
+            let accountList = [];
 
             // -------- 存储键 --------
-            const STORAGE_KEY_POKEMON = 'eggGeneticsPokemons_v3';
-            const STORAGE_KEY_ID = 'eggGeneticsIdCounter_v3';
+            const STORAGE_ACCOUNT_LIST = 'eggGeneticsAccountList';
+            const STORAGE_PREFIX = 'eggGeneticsData_';
 
             // -------- 工具函数 --------
             function toastMessage(msg, type = 'info', duration = 2800) {
@@ -1495,6 +1650,237 @@
             }
 
             function genId() { return ++idCounter; }
+
+            // -------- 账号管理 --------
+            function loadAccountList() {
+                try {
+                    const data = localStorage.getItem(STORAGE_ACCOUNT_LIST);
+                    if (data) {
+                        accountList = JSON.parse(data);
+                        if (!Array.isArray(accountList)) accountList = [];
+                    } else {
+                        accountList = ['default'];
+                    }
+                } catch (_) {
+                    accountList = ['default'];
+                }
+                // 确保 default 存在
+                if (!accountList.includes('default')) {
+                    accountList.unshift('default');
+                }
+                return accountList;
+            }
+
+            function saveAccountList() {
+                try {
+                    localStorage.setItem(STORAGE_ACCOUNT_LIST, JSON.stringify(accountList));
+                } catch (_) { /* ignore */ }
+            }
+
+            function getAccountStorageKey(accountName) {
+                return STORAGE_PREFIX + accountName;
+            }
+
+            function loadAccountData(accountName) {
+                try {
+                    const key = getAccountStorageKey(accountName);
+                    const data = localStorage.getItem(key);
+                    if (data) {
+                        const parsed = JSON.parse(data);
+                        if (parsed && typeof parsed === 'object') {
+                            return parsed;
+                        }
+                    }
+                } catch (_) { /* ignore */ }
+                return { pokemons: [], idCounter: 0 };
+            }
+
+            function saveAccountData(accountName, data) {
+                try {
+                    const key = getAccountStorageKey(accountName);
+                    localStorage.setItem(key, JSON.stringify(data));
+                } catch (_) { /* ignore */ }
+            }
+
+            function deleteAccountData(accountName) {
+                try {
+                    const key = getAccountStorageKey(accountName);
+                    localStorage.removeItem(key);
+                } catch (_) { /* ignore */ }
+            }
+
+            function switchAccount(accountName) {
+                if (accountName === currentAccount) return;
+                // 保存当前账号数据
+                const currentData = {
+                    pokemons: userPokemons,
+                    idCounter: idCounter
+                };
+                saveAccountData(currentAccount, currentData);
+
+                // 加载新账号数据
+                const newData = loadAccountData(accountName);
+                userPokemons = newData.pokemons || [];
+                idCounter = newData.idCounter || 0;
+                currentAccount = accountName;
+
+                // 更新UI
+                currentAccountName.textContent = accountName;
+                renderPokemonList();
+                updateResultBadge();
+                clearResults();
+                renderAccountTags();
+                localStorage.setItem('eggGeneticsLastAccount', currentAccount);
+                toastMessage(`已切换到账号：${accountName}`, 'success');
+            }
+
+            function addOrSwitchAccount(accountName) {
+                accountName = accountName.trim();
+                if (!accountName) {
+                    toastMessage('请输入账号名称', 'warning');
+                    return;
+                }
+                if (accountName.length > 20) {
+                    toastMessage('账号名称不能超过20个字符', 'warning');
+                    return;
+                }
+                // 如果账号已存在，直接切换
+                if (accountList.includes(accountName)) {
+                    if (accountName !== currentAccount) {
+                        switchAccount(accountName);
+                    } else {
+                        toastMessage('已经是当前账号', 'info');
+                    }
+                    return;
+                }
+                // 新账号
+                accountList.push(accountName);
+                saveAccountList();
+                // 创建空数据
+                saveAccountData(accountName, { pokemons: [], idCounter: 0 });
+                // 切换到新账号
+                switchAccount(accountName);
+                renderAccountTags();
+                toastMessage(`已创建并切换到账号：${accountName}`, 'success');
+                newAccountInput.value = '';
+            }
+
+            function renameAccount(oldName, newName) {
+                newName = newName.trim();
+                if (!newName) {
+                    toastMessage('新名称不能为空', 'warning');
+                    return false;
+                }
+                if (newName.length > 20) {
+                    toastMessage('账号名称不能超过20个字符', 'warning');
+                    return false;
+                }
+                if (newName === oldName) {
+                    toastMessage('新名称与旧名称相同', 'info');
+                    return false;
+                }
+                if (accountList.includes(newName)) {
+                    toastMessage(`账号 "${newName}" 已存在`, 'warning');
+                    return false;
+                }
+                // 重命名存储数据
+                const data = loadAccountData(oldName);
+                // 删除旧数据
+                deleteAccountData(oldName);
+                // 保存新数据
+                saveAccountData(newName, data);
+                // 更新账号列表
+                const idx = accountList.indexOf(oldName);
+                if (idx !== -1) {
+                    accountList[idx] = newName;
+                    saveAccountList();
+                }
+                // 如果当前账号是旧名称，更新当前账号
+                if (currentAccount === oldName) {
+                    currentAccount = newName;
+                    currentAccountName.textContent = newName;
+                    localStorage.setItem('eggGeneticsLastAccount', newName);
+                }
+                renderAccountTags();
+                toastMessage(`账号已从 "${oldName}" 重命名为 "${newName}"`, 'success');
+                return true;
+            }
+
+            function deleteAccount(accountName) {
+                if (accountName === 'default') {
+                    toastMessage('不能删除默认账号', 'warning');
+                    return;
+                }
+                if (accountName === currentAccount) {
+                    toastMessage('不能删除当前正在使用的账号', 'warning');
+                    return;
+                }
+                if (!confirm(`确定要删除账号 "${accountName}" 及其所有精灵数据吗？`)) return;
+                // 从列表中移除
+                const idx = accountList.indexOf(accountName);
+                if (idx !== -1) {
+                    accountList.splice(idx, 1);
+                    saveAccountList();
+                }
+                // 删除存储数据
+                deleteAccountData(accountName);
+                renderAccountTags();
+                toastMessage(`已删除账号 "${accountName}"`, 'success');
+            }
+
+            function renderAccountTags() {
+                accountSwitchGroup.innerHTML = '';
+                for (const acc of accountList) {
+                    const tag = document.createElement('span');
+                    tag.className = 'account-tag' + (acc === currentAccount ? ' active' : '');
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'tag-name';
+                    nameSpan.textContent = acc;
+                    nameSpan.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const name = this.parentElement.dataset.account;
+                        if (name !== currentAccount) {
+                            switchAccount(name);
+                        }
+                    });
+                    tag.dataset.account = acc;
+
+                    const actions = document.createElement('span');
+                    actions.className = 'tag-actions';
+
+                    // 编辑按钮（仅非default账号可编辑）
+                    if (acc !== 'default') {
+                        const editBtn = document.createElement('button');
+                        editBtn.className = 'btn-icon';
+                        editBtn.innerHTML = '✏️';
+                        editBtn.title = '重命名';
+                        editBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const oldName = this.closest('.account-tag').dataset.account;
+                            const newName = prompt('请输入新的账号名称：', oldName);
+                            if (newName !== null) {
+                                renameAccount(oldName, newName);
+                            }
+                        });
+                        actions.appendChild(editBtn);
+
+                        const delBtn = document.createElement('button');
+                        delBtn.className = 'btn-icon danger';
+                        delBtn.innerHTML = '❌';
+                        delBtn.title = '删除';
+                        delBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const name = this.closest('.account-tag').dataset.account;
+                            deleteAccount(name);
+                        });
+                        actions.appendChild(delBtn);
+                    }
+
+                    tag.appendChild(nameSpan);
+                    tag.appendChild(actions);
+                    accountSwitchGroup.appendChild(tag);
+                }
+            }
 
             // -------- 数据初始化：合并同名精灵蛋组 --------
             function initEggData() {
@@ -1545,37 +1931,32 @@
                 undiscoveredCount.textContent = undiscovered;
             }
 
-            // -------- 本地存储 --------
-            function loadPokemonsFromStorage() {
-                try {
-                    const data = localStorage.getItem(STORAGE_KEY_POKEMON);
-                    if (data) {
-                        const parsed = JSON.parse(data);
-                        if (Array.isArray(parsed)) {
-                            userPokemons = parsed;
-                            return true;
-                        }
-                    }
-                } catch (_) { /* ignore */ }
-                return false;
+            // -------- 加载当前账号数据 --------
+            function loadCurrentAccount() {
+                let lastAccount = localStorage.getItem('eggGeneticsLastAccount');
+                if (lastAccount && accountList.includes(lastAccount)) {
+                    currentAccount = lastAccount;
+                } else {
+                    currentAccount = 'default';
+                }
+                const data = loadAccountData(currentAccount);
+                userPokemons = data.pokemons || [];
+                idCounter = data.idCounter || 0;
+                currentAccountName.textContent = currentAccount;
+                renderAccountTags();
+                renderPokemonList();
+                updateResultBadge();
+                clearResults();
             }
 
-            function loadIdFromStorage() {
-                try {
-                    const val = localStorage.getItem(STORAGE_KEY_ID);
-                    if (val) {
-                        idCounter = parseInt(val, 10) || 0;
-                        return true;
-                    }
-                } catch (_) { /* ignore */ }
-                return false;
-            }
-
-            function savePokemonsToStorage() {
-                try {
-                    localStorage.setItem(STORAGE_KEY_POKEMON, JSON.stringify(userPokemons));
-                    localStorage.setItem(STORAGE_KEY_ID, String(idCounter));
-                } catch (_) { /* ignore */ }
+            // -------- 保存当前账号数据 --------
+            function saveCurrentAccountData() {
+                const data = {
+                    pokemons: userPokemons,
+                    idCounter: idCounter
+                };
+                saveAccountData(currentAccount, data);
+                localStorage.setItem('eggGeneticsLastAccount', currentAccount);
             }
 
             // -------- 折叠切换 --------
@@ -1852,26 +2233,27 @@
             // -------- 删除精灵 --------
             function deletePokemon(id) {
                 userPokemons = userPokemons.filter(p => p.id !== id);
-                savePokemonsToStorage();
+                saveCurrentAccountData();
                 renderPokemonList();
                 updateResultBadge();
                 clearResults();
                 toastMessage('已删除该精灵', 'success');
             }
 
-            // -------- 清空所有精灵 --------
+            // -------- 清空所有精灵（当前账号） --------
             function clearAllPokemons() {
                 if (userPokemons.length === 0) {
                     toastMessage('没有精灵需要清除', 'warning');
                     return;
                 }
-                if (!confirm('确定要清除所有已输入的精灵吗？')) return;
+                if (!confirm(`确定要清除当前账号 "${currentAccount}" 中的所有精灵吗？`)) return;
                 userPokemons = [];
-                savePokemonsToStorage();
+                idCounter = 0;
+                saveCurrentAccountData();
                 renderPokemonList();
                 clearResults();
                 updateResultBadge();
-                toastMessage('已清空所有精灵', 'success');
+                toastMessage(`已清空账号 ${currentAccount} 的所有精灵`, 'success');
             }
 
             // -------- 清空结果 --------
@@ -2173,7 +2555,7 @@
                 };
 
                 userPokemons.push(newPokemon);
-                savePokemonsToStorage();
+                saveCurrentAccountData();
                 renderPokemonList();
                 updateResultBadge();
                 clearResults();
@@ -2194,11 +2576,8 @@
                 initEggData();
                 updateStats();
 
-                loadPokemonsFromStorage();
-                loadIdFromStorage();
-
-                renderPokemonList();
-                updateResultBadge();
+                loadAccountList();
+                loadCurrentAccount();
 
                 // 折叠按钮事件
                 toggleListBtn.addEventListener('click', toggleList);
@@ -2218,6 +2597,19 @@
                 });
                 searchName.addEventListener('input', function() {
                     if (currentPairs.length > 0) renderResults(currentPairs);
+                });
+
+                // 账号管理
+                addAccountBtn.addEventListener('click', function() {
+                    const name = newAccountInput.value.trim();
+                    addOrSwitchAccount(name);
+                });
+                newAccountInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        const name = this.value.trim();
+                        addOrSwitchAccount(name);
+                        e.preventDefault();
+                    }
                 });
 
                 nameInput.addEventListener('keydown', function(e) {
@@ -2257,7 +2649,7 @@
                     }
                 });
 
-                toastMessage(`✅ 已加载 ${eggData.length} 个精灵数据，输入名称自动匹配`, 'success', 2500);
+                toastMessage(`✅ 已加载 ${eggData.length} 个精灵数据，当前账号：${currentAccount}`, 'success', 2500);
             }
 
             if (document.readyState === 'loading') {
