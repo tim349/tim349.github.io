@@ -690,6 +690,14 @@
         .egg-card .egg-header .egg-meta .meta-item .label {
             color: var(--gray-500);
         }
+        .egg-card .egg-header .egg-meta .meta-item .group-tag {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 0 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
+        }
         .egg-card .egg-header .expand-hint {
             font-size: 12px;
             color: var(--gray-500);
@@ -711,45 +719,61 @@
         .egg-card .egg-body.open {
             display: block;
         }
-        .egg-card .egg-body .pair-detail {
+        .egg-card .egg-body .pair-item {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-left: 3px solid var(--gray-300);
+        }
+        .egg-card .egg-body .pair-item:last-child {
+            margin-bottom: 0;
+        }
+        .egg-card .egg-body .pair-item.stable-pair {
+            border-left-color: var(--stable-color);
+            background: var(--stable-bg);
+        }
+        .egg-card .egg-body .pair-item .pair-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 4px;
+        }
+        .egg-card .egg-body .pair-item .pair-detail {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px 24px;
+            gap: 8px 20px;
             font-size: 13px;
             color: var(--gray-700);
-            background: var(--gray-100);
-            padding: 10px 14px;
-            border-radius: 8px;
-            margin-bottom: 8px;
         }
-        .egg-card .egg-body .pair-detail .label {
+        .egg-card .egg-body .pair-item .pair-detail .label {
             color: var(--gray-500);
             font-weight: 500;
             margin-right: 3px;
         }
-        .egg-card .egg-body .inherit-info {
+        .egg-card .egg-body .pair-item .inherit-info {
             display: flex;
             flex-wrap: wrap;
             gap: 12px 24px;
             font-size: 13px;
-            margin-top: 6px;
-            background: #fafbfc;
-            padding: 8px 12px;
+            margin-top: 4px;
+            background: rgba(255,255,255,0.5);
+            padding: 4px 10px;
             border-radius: 6px;
         }
-        .egg-card .egg-body .inherit-info .inherit-item {
+        .egg-card .egg-body .pair-item .inherit-info .inherit-item {
             display: flex;
             align-items: center;
             gap: 4px;
         }
-        .egg-card .egg-body .inherit-info .inherit-item .icon {
+        .egg-card .egg-body .pair-item .inherit-info .inherit-item .icon {
             font-size: 16px;
         }
-        .egg-card .egg-body .inherit-info .inherit-item .val {
+        .egg-card .egg-body .pair-item .inherit-info .inherit-item .val {
             font-weight: 600;
             color: var(--primary-dark);
         }
-        .egg-card .egg-body .inherit-info .inherit-item .val.none {
+        .egg-card .egg-body .pair-item .inherit-info .inherit-item .val.none {
             color: var(--gray-500);
             font-weight: 400;
         }
@@ -914,6 +938,52 @@
             color: #fff;
         }
 
+        /* ===== 筛选器（稳定遗传分析专用） ===== */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .filter-bar .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--gray-700);
+        }
+
+        .filter-bar .filter-group select,
+        .filter-bar .filter-group input {
+            padding: 6px 10px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 13px;
+            background: #fff;
+            outline: none;
+            height: 36px;
+            min-width: 80px;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+        .filter-bar .filter-group select:focus,
+        .filter-bar .filter-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(91, 124, 250, 0.15);
+        }
+        .filter-bar .filter-group select {
+            width: auto;
+            min-width: 120px;
+        }
+        .filter-bar .filter-group input {
+            flex: 1;
+            min-width: 100px;
+        }
+
         /* ===== 响应式 ===== */
         @media (max-width: 700px) {
             .app-header {
@@ -1031,6 +1101,22 @@
             .pagination {
                 flex-wrap: wrap;
             }
+            .egg-card .egg-body .pair-item .pair-detail {
+                flex-direction: column;
+                gap: 4px;
+            }
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-bar .filter-group {
+                flex-wrap: wrap;
+            }
+            .filter-bar .filter-group select,
+            .filter-bar .filter-group input {
+                height: 40px;
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1121,7 +1207,7 @@
         <div class="current-account">👤 当前账号：<span id="currentAccountName">default</span></div>
         <div class="account-input-group">
             <input type="text" id="newAccountInput" placeholder="输入新账号名称..." maxlength="20">
-            <button class="btn btn-primary" id="addAccountBtn">➕ 添加</button>
+            <button class="btn btn-primary" id="addAccountBtn">➕ 添加/切换</button>
         </div>
         <div class="account-switch-group" id="accountSwitchGroup">
             <!-- 动态生成账号标签 -->
@@ -2994,7 +3080,7 @@
         }
 
         // ============================================================
-        //  渲染蛋卡片（用于配对结果和匹配结果）
+        //  渲染蛋卡片（稳定卡片全部在前，非稳定在后）
         // ============================================================
         function renderEggs(pairs, container, titlePrefix = '') {
             if (!pairs || pairs.length === 0) {
@@ -3003,41 +3089,87 @@
                 return;
             }
 
-            const stable = pairs.filter(p => p.isStable);
-            const nonStable = pairs.filter(p => !p.isStable);
-            const sorted = [...stable, ...nonStable];
+            // 按母方分组
+            const groups = {};
+            for (const pair of pairs) {
+                const fid = pair.female.id;
+                if (!groups[fid]) {
+                    groups[fid] = {
+                        female: pair.female,
+                        stablePairs: [],
+                        nonStablePairs: []
+                    };
+                }
+                if (pair.isStable) {
+                    groups[fid].stablePairs.push(pair);
+                } else {
+                    groups[fid].nonStablePairs.push(pair);
+                }
+            }
+
+            // 分别收集所有稳定卡片和非稳定卡片
+            let stableCards = [];
+            let nonStableCards = [];
+
+            for (const fid in groups) {
+                const group = groups[fid];
+                if (group.stablePairs.length > 0) {
+                    stableCards.push({
+                        female: group.female,
+                        pairs: group.stablePairs,
+                        isStable: true
+                    });
+                }
+                if (group.nonStablePairs.length > 0) {
+                    nonStableCards.push({
+                        female: group.female,
+                        pairs: group.nonStablePairs,
+                        isStable: false
+                    });
+                }
+            }
+
+            // 稳定卡片优先，非稳定卡片在后
+            const allCards = [...stableCards, ...nonStableCards];
 
             let html = '';
-            for (const pair of sorted) {
-                const isStable = pair.isStable;
-                const female = pair.female;
+            for (const card of allCards) {
+                html += generateEggCard(card.female, card.pairs, titlePrefix, card.isStable);
+            }
+
+            container.innerHTML = html;
+            container.style.display = 'block';
+        }
+
+        // 辅助函数：生成单个蛋卡片
+        function generateEggCard(female, pairs, titlePrefix, isStable) {
+            const hasStable = isStable;
+            const stableBadge = hasStable ?
+                `<span class="badge stable">⭐ 稳定遗传</span>` :
+                `<span class="badge warning">非稳定遗传</span>`;
+
+            const bodyMedalDisplay = female.bodyMedal !== '无' ? `🧍${female.bodyMedal}` : '无';
+            const voiceMedalDisplay = female.voiceMedal !== '无' ? `🔊${female.voiceMedal}` : '无';
+            const natureInfo = female.nature ? getNatureInfo(female.nature) : null;
+            const natureDisplay = natureInfo ?
+                `${female.nature} (${natureInfo.plus} ${natureInfo.minus})` :
+                (female.nature || '无');
+            const femaleGroups = getPokemonGroups(female.name);
+            const groupsHtml = femaleGroups.map(g =>
+                `<span class="group-tag">${g}</span>`
+            ).join('');
+
+            const titleText = `${titlePrefix}${female.name} 的蛋`;
+
+            // 构建每个配对的详情HTML
+            let pairsHtml = '';
+            for (const pair of pairs) {
                 const male = pair.male;
-
-                const titleText = `${titlePrefix}${female.name} 的蛋`;
-                const stableBadge = isStable ?
-                    `<span class="badge stable">⭐ 稳定遗传</span>` :
-                    `<span class="badge warning">非稳定遗传</span>`;
-
-                const bodyMedalDisplay = female.bodyMedal !== '无' ? `🧍${female.bodyMedal}` : '无';
-                const voiceMedalDisplay = female.voiceMedal !== '无' ? `🔊${female.voiceMedal}` : '无';
-                const natureInfo = female.nature ? getNatureInfo(female.nature) : null;
-                const natureDisplay = natureInfo ?
-                    `${female.nature} (${natureInfo.plus} ${natureInfo.minus})` :
-                    (female.nature || '无');
-
-                const groupsHtml = pair.commonGroups.map(g =>
-                    `<span class="group-tag">${g}</span>`
-                ).join('');
-
+                const isStablePair = pair.isStable;
                 const maleNatureInfo = male.nature ? getNatureInfo(male.nature) : null;
-                const femaleNatureInfo = female.nature ? getNatureInfo(female.nature) : null;
                 const maleNatureStr = maleNatureInfo ?
                     `${male.nature} (${maleNatureInfo.plus} ${maleNatureInfo.minus})` :
                     (male.nature || '无');
-                const femaleNatureStr = femaleNatureInfo ?
-                    `${female.nature} (${femaleNatureInfo.plus} ${femaleNatureInfo.minus})` :
-                    (female.nature || '无');
-
                 const bodyInherit = pair.inheritBody ?
                     `<span class="val">${pair.inheritBody}</span>` :
                     '<span class="val none">无</span>';
@@ -3047,60 +3179,64 @@
                 const natureInherit = pair.inheritNature ?
                     `<span class="val">${pair.inheritNature}</span>` :
                     '<span class="val none">无</span>';
+                const commonGroups = pair.commonGroups;
+                const commonGroupsHtml = commonGroups.map(g =>
+                    `<span class="group-tag">${g}</span>`
+                ).join('');
 
-                html += `
-                    <div class="egg-card ${isStable ? 'stable-egg' : ''}">
-                        <div class="egg-header" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-hint .arrow').classList.toggle('open')">
-                            <span class="egg-icon">🥚</span>
-                            <span class="egg-title">
-                                ${titleText}
-                                ${stableBadge}
-                            </span>
-                            <span class="egg-meta">
-                                <span class="meta-item"><span class="label">♀</span> ${female.name}</span>
-                                <span class="meta-item">${bodyMedalDisplay}</span>
-                                <span class="meta-item">${voiceMedalDisplay}</span>
-                                <span class="meta-item">💭 ${natureDisplay}</span>
-                                <span class="meta-item">蛋组: <span class="common-groups">${groupsHtml}</span></span>
-                            </span>
-                            <span class="expand-hint">
-                                展开 <span class="arrow">▼</span>
-                            </span>
-                        </div>
-                        <div class="egg-body">
-                            <div class="pair-detail">
-                                <div><span class="label">♂ 父方</span> ${male.name} 
-                                    ${male.bodyMedal !== '无' ? '🧍' + male.bodyMedal : ''} 
-                                    ${male.voiceMedal !== '无' ? '🔊' + male.voiceMedal : ''} 
-                                    💭 ${maleNatureStr}
-                                </div>
-                                <div><span class="label">♀ 母方</span> ${female.name} 
-                                    ${female.bodyMedal !== '无' ? '🧍' + female.bodyMedal : ''} 
-                                    ${female.voiceMedal !== '无' ? '🔊' + female.voiceMedal : ''} 
-                                    💭 ${femaleNatureStr}
-                                </div>
+                pairsHtml += `
+                    <div class="pair-item ${isStablePair ? 'stable-pair' : ''}">
+                        <div class="pair-label">${isStablePair ? '⭐ 稳定遗传配对' : '配对'}</div>
+                        <div class="pair-detail">
+                            <div><span class="label">♂ 父方</span> ${male.name} 
+                                ${male.bodyMedal !== '无' ? '🧍' + male.bodyMedal : ''} 
+                                ${male.voiceMedal !== '无' ? '🔊' + male.voiceMedal : ''} 
+                                💭 ${maleNatureStr}
                             </div>
-                            <div class="inherit-info">
-                                <div class="inherit-item">
-                                    <span class="icon">🧍</span>
-                                    体型奖牌: ${bodyInherit}
-                                </div>
-                                <div class="inherit-item">
-                                    <span class="icon">🔊</span>
-                                    声音奖牌: ${voiceInherit}
-                                </div>
-                                <div class="inherit-item">
-                                    <span class="icon">💭</span>
-                                    性格: ${natureInherit}
-                                </div>
+                            <div><span class="label">共同蛋组</span> <span class="common-groups">${commonGroupsHtml}</span></div>
+                        </div>
+                        <div class="inherit-info">
+                            <div class="inherit-item">
+                                <span class="icon">🧍</span>
+                                体型奖牌: ${bodyInherit}
+                            </div>
+                            <div class="inherit-item">
+                                <span class="icon">🔊</span>
+                                声音奖牌: ${voiceInherit}
+                            </div>
+                            <div class="inherit-item">
+                                <span class="icon">💭</span>
+                                性格: ${natureInherit}
                             </div>
                         </div>
                     </div>
                 `;
             }
 
-            container.innerHTML = html;
-            container.style.display = 'block';
+            return `
+                <div class="egg-card ${hasStable ? 'stable-egg' : ''}">
+                    <div class="egg-header" onclick="this.nextElementSibling.classList.toggle('open'); this.querySelector('.expand-hint .arrow').classList.toggle('open')">
+                        <span class="egg-icon">🥚</span>
+                        <span class="egg-title">
+                            ${titleText}
+                            ${stableBadge}
+                        </span>
+                        <span class="egg-meta">
+                            <span class="meta-item"><span class="label">♀</span> ${female.name}</span>
+                            <span class="meta-item">${bodyMedalDisplay}</span>
+                            <span class="meta-item">${voiceMedalDisplay}</span>
+                            <span class="meta-item">💭 ${natureDisplay}</span>
+                            <span class="meta-item">蛋组: <span class="common-groups">${groupsHtml}</span></span>
+                        </span>
+                        <span class="expand-hint">
+                            展开 <span class="arrow">▼</span>
+                        </span>
+                    </div>
+                    <div class="egg-body">
+                        ${pairsHtml}
+                    </div>
+                </div>
+            `;
         }
 
         // ============================================================
@@ -3162,7 +3298,9 @@
             }
             emptyResult.style.display = 'none';
             resultGrid.style.display = 'grid';
-            resultBadge.textContent = `${filtered.length} 个配对${filtered.some(p => p.isStable) ? ' ⭐ 含稳定遗传' : ''}`;
+            const stableCount = filtered.filter(p => p.isStable).length;
+            const totalCount = filtered.length;
+            resultBadge.textContent = `${totalCount} 个配对${stableCount > 0 ? ` ⭐ 含 ${stableCount} 个稳定遗传` : ''}`;
             resultBadge.className = 'badge success';
             filterBar.style.display = 'flex';
             renderEggs(filtered, resultGrid, '');
